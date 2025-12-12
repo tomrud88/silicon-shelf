@@ -342,11 +342,28 @@ async function main() {
     ],
   });
 
+  const testUser = await prisma.user.create({
+    data: {
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@test.com",
+      passwordHash: "test123", // In production, use bcrypt!
+      address: "123 Main St",
+      city: "New York",
+      postalCode: "10001",
+      country: "USA",
+      phone: "+1234567890",
+    },
+  });
+
+  console.log("Created test user with ID:", testUser.id);
+
   console.log("Seeding finished successfully!");
   console.log("Created:");
   console.log("- 5 brands");
   console.log("- 5 categories (Mouse, Monitor, Headphone, Keyboard, Webcam)");
   console.log("- 25 products (5 per category)");
+  console.log("- 1 test user (john@test.com)");
 }
 
 main()
