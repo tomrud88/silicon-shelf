@@ -8,7 +8,11 @@ export default function Header() {
     <header className="w-full bg-[#1A1A1A]">
       <div className="max-w-[1440px] mx-auto px-10 py-8 flex flex-col gap-10">
         <div className="flex justify-between items-center">
-          <img src="/logo.svg" alt="SiliconShelf" className="w-[210px] h-[80px]" />
+          <img
+            src="/logo.svg"
+            alt="SiliconShelf"
+            className="w-[210px] h-[80px]"
+          />
           <div className="flex gap-7 items-center w-[92px] h-10">
             <Link href="/cart">
               <CartIcon />

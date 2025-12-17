@@ -1,39 +1,63 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-[#222327]">
-      <div className="max-w-[1440px] mx-auto px-[60px] py-[140px] flex justify-between">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-[60px] py-10 sm:py-16 md:py-24 lg:py-[140px] flex flex-col lg:flex-row justify-between gap-12 lg:gap-0">
         {/* Logo container */}
-        <div className="w-[532px] h-[214px] flex flex-col gap-6 items-start">
+        <div className="w-full lg:w-[532px] flex flex-col gap-6 items-start">
           {/* Logo */}
-          <img src="/logo.svg" alt="Silicon Shelf" className="h-[70px] -my-2" />
+          <img
+            src="/logo.svg"
+            alt="Silicon Shelf"
+            className="h-[50px] sm:h-[60px] md:h-[70px] -my-2"
+          />
 
           {/* Copyright text */}
-          <p className="w-[216px] font-normal text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+          <p className="max-w-full sm:max-w-[216px] font-normal text-sm sm:text-base leading-[26px] tracking-normal text-[#E7E7E7]">
             © 2023 NexusHub. All rights reserved.
           </p>
 
           {/* Payment icons */}
-          <div className="w-[282px] h-[40px] flex items-center justify-start -space-x-1">
-            <img src="/Visa.svg" alt="Visa" className="h-[40px] -ml-2" />
-            <img src="/mastercard.svg" alt="Mastercard" className="h-[40px]" />
-            <img src="/paypal.svg" alt="PayPal" className="h-[40px]" />
-            <img src="/apple.svg" alt="Apple Pay" className="h-[40px]" />
-            <img src="/gpay.svg" alt="Google Pay" className="h-[40px]" />
+          <div className="w-full sm:w-[282px] flex flex-wrap items-center justify-start gap-1 sm:-space-x-1">
+            <img
+              src="/Visa.svg"
+              alt="Visa"
+              className="h-[32px] sm:h-[40px] sm:-ml-2"
+            />
+            <img
+              src="/mastercard.svg"
+              alt="Mastercard"
+              className="h-[32px] sm:h-[40px]"
+            />
+            <img
+              src="/paypal.svg"
+              alt="PayPal"
+              className="h-[32px] sm:h-[40px]"
+            />
+            <img
+              src="/apple.svg"
+              alt="Apple Pay"
+              className="h-[32px] sm:h-[40px]"
+            />
+            <img
+              src="/gpay.svg"
+              alt="Google Pay"
+              className="h-[32px] sm:h-[40px]"
+            />
           </div>
         </div>
 
         {/* Menu container */}
-        <div className="w-[788px] h-[214px] flex justify-between">
+        <div className="w-full lg:w-[788px] grid grid-cols-2 sm:grid-cols-4 gap-8 lg:flex lg:justify-between">
           {/* Company */}
-          <div className="w-[191px] h-[214px] flex flex-col gap-8">
-            <h3 className="font-semibold text-xl leading-[30px] text-[#E7E7E7]">
+          <div className="w-full lg:w-[191px] flex flex-col gap-6 lg:gap-8">
+            <h3 className="font-semibold text-lg sm:text-xl leading-[30px] text-[#E7E7E7]">
               Company
             </h3>
-            <ul className="w-[191px] h-[110px] flex flex-col gap-4">
+            <ul className="w-full flex flex-col gap-3 lg:gap-4">
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   About Us
                 </a>
@@ -41,7 +65,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Contact
                 </a>
@@ -49,7 +73,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Partner
                 </a>
@@ -58,15 +82,15 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div className="w-[191px] h-[214px] flex flex-col gap-8">
-            <h3 className="font-semibold text-xl leading-[30px] text-[#E7E7E7]">
+          <div className="w-full lg:w-[191px] flex flex-col gap-6 lg:gap-8">
+            <h3 className="font-semibold text-lg sm:text-xl leading-[30px] text-[#E7E7E7]">
               Social
             </h3>
-            <ul className="w-[191px] h-[110px] flex flex-col gap-4">
+            <ul className="w-full flex flex-col gap-3 lg:gap-4">
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Instagram
                 </a>
@@ -74,7 +98,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Twitter
                 </a>
@@ -82,7 +106,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Facebook
                 </a>
@@ -90,7 +114,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -99,15 +123,15 @@ export default function Footer() {
           </div>
 
           {/* FAQ */}
-          <div className="w-[191px] h-[214px] flex flex-col gap-8">
-            <h3 className="font-semibold text-xl leading-[30px] text-[#E7E7E7]">
+          <div className="w-full lg:w-[191px] flex flex-col gap-6 lg:gap-8">
+            <h3 className="font-semibold text-lg sm:text-xl leading-[30px] text-[#E7E7E7]">
               FAQ
             </h3>
-            <ul className="w-[191px] h-[110px] flex flex-col gap-4">
+            <ul className="w-full flex flex-col gap-3 lg:gap-4">
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Account
                 </a>
@@ -115,7 +139,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Deliveries
                 </a>
@@ -123,7 +147,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Orders
                 </a>
@@ -131,7 +155,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Payments
                 </a>
@@ -140,15 +164,15 @@ export default function Footer() {
           </div>
 
           {/* Resources */}
-          <div className="w-[191px] h-[214px] flex flex-col gap-8">
-            <h3 className="font-semibold text-xl leading-[30px] text-[#E7E7E7]">
+          <div className="w-full lg:w-[191px] flex flex-col gap-6 lg:gap-8">
+            <h3 className="font-semibold text-lg sm:text-xl leading-[30px] text-[#E7E7E7]">
               Resources
             </h3>
-            <ul className="w-[191px] h-[110px] flex flex-col gap-4">
+            <ul className="w-full flex flex-col gap-3 lg:gap-4">
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   E-books
                 </a>
@@ -156,7 +180,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Tutorials
                 </a>
@@ -164,7 +188,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Course
                 </a>
@@ -172,7 +196,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="font-normal text-base leading-[22px] text-[#E7E7E7]"
+                  className="font-normal text-sm sm:text-base leading-[22px] text-[#E7E7E7] hover:text-white transition-colors"
                 >
                   Blog
                 </a>
