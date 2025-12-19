@@ -45,6 +45,7 @@ async function main() {
         console.log(`    Brand: ${product.brand?.name || "N/A"}`);
         console.log(`    Price: $${product.price}`);
         console.log(`    Stock: ${product.stock}`);
+        console.log(`    Image URL: ${product.imageUrl}`);
       });
     }
   );

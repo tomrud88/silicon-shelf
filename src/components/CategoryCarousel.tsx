@@ -35,23 +35,23 @@ export default function CategoryCarousel({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="w-[1360px] h-[488px] flex items-center justify-center">
+      <div className="w-full max-w-[1360px] h-auto lg:h-[488px] flex items-center justify-center">
         {/* Ad Banner */}
-        <div className="w-[1360px] h-[452px] rounded-md border border-[#383B42] py-20 px-[120px] flex gap-2.5 items-center justify-between overflow-hidden relative">
+        <div className="w-full max-w-[1360px] min-h-[400px] lg:h-[452px] rounded-md border border-[#383B42] py-10 lg:py-20 px-8 lg:px-[120px] flex flex-col lg:flex-row gap-8 lg:gap-2.5 items-center justify-between overflow-hidden relative">
           {/* Left Arrow */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-r-md flex items-center justify-center transition-all z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-r-md flex items-center justify-center transition-all z-10"
           >
             <img src="/shape-left.svg" alt="Previous" className="w-2 h-4" />
           </button>
 
-          <div className="w-[433px] h-[240px] flex flex-col gap-10">
-            <div className="w-[433px] h-[146px] flex flex-col gap-6">
-              <h2 className="h-11 font-medium text-[32px] leading-[44px] tracking-tight text-[#FCFCFC]">
+          <div className="w-full max-w-[433px] flex flex-col gap-6 lg:gap-10 z-10">
+            <div className="flex flex-col gap-4 lg:gap-6">
+              <h2 className="font-medium text-2xl lg:text-[32px] leading-8 lg:leading-[44px] tracking-tight text-[#FCFCFC]">
                 {currentCategory.name}
               </h2>
-              <p className="w-[433px] h-[78px] font-normal text-base leading-[26px] tracking-normal text-[#E7E7E7]">
+              <p className="font-normal text-sm lg:text-base leading-6 lg:leading-[26px] tracking-normal text-[#E7E7E7]">
                 {currentCategory.description || currentCategory.exploreInfo}
               </p>
             </div>
@@ -69,14 +69,14 @@ export default function CategoryCarousel({
           <img
             src={currentCategory.image || "/monitor-big.png"}
             alt={currentCategory.name}
-            className="w-[582.61px] h-[472.68px]"
+            className="w-[300px] h-[243px] md:w-[400px] md:h-[324px] lg:w-[582.61px] lg:h-[472.68px]"
             style={{ transform: "rotate(-2.55deg)" }}
           />
 
           {/* Right Arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-0 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-l-md flex items-center justify-center transition-all z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-l-md flex items-center justify-center transition-all z-10"
           >
             <img
               src="/shape-left.svg"
