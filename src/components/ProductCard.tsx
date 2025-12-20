@@ -32,7 +32,7 @@ export default function ProductCard({
         {/* Badge */}
         <div className="w-[268px] h-9 flex gap-[10px] opacity-100">
           {/* Type Badge */}
-          <div className="w-[66px] h-9 rounded-[6px] flex items-center justify-center gap-[10px] pt-[6px] px-[10px] pb-[6px] opacity-100 bg-[#E5610A]">
+          <div className="h-9 rounded-[6px] flex items-center justify-center gap-[10px] py-[6px] px-3 opacity-100 bg-[#E5610A] whitespace-nowrap">
             <span className="font-['Inter'] font-medium text-sm leading-6 tracking-[0%]">
               {categoryName}
             </span>

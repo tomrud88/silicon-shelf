@@ -1,35 +1,30 @@
 "use client";
 
 import { useRef } from "react";
-import ProductCard from "./ProductCard";
+import IconCard from "./IconCard";
 import ArrowRightIcon from "./icons/ArrowRightIcon";
 import Button from "./Button";
+import Image from "next/image";
 
-interface RecommendationSectionProps {
-  recommendations: any[];
-}
-
-export default function RecommendationSection({
-  recommendations,
-}: RecommendationSectionProps) {
+export default function BrandSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const handleSeeAll = () => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const productCardWidth = 300;
-      const gap = 32;
+      const cardWidth = 220; // max-w-[220px] on large screens
+      const gap = 32; // gap-8
       const paddingLeft = 40; // pl-10 = 40px
 
       // Check if screen is large (>= 1568px)
       const isLargeScreen = container.clientWidth >= 1568;
-      const spacerWidth = isLargeScreen ? 178 : 0; // w-32 (128px) + 50px extra on large screens
+      const spacerWidth = isLargeScreen ? 178 : 32;
 
-      // Calculate the total width needed to show all 6 products
+      // Calculate the total width needed to show all 6 brands
       const totalContentWidth =
-        paddingLeft + 6 * productCardWidth + 5 * gap + spacerWidth;
+        paddingLeft + 6 * cardWidth + 5 * gap + spacerWidth;
 
-      // Scroll to show the last product aligned to the right edge of the container
+      // Scroll to show the last brand aligned to the right edge of the container
       const scrollPosition = totalContentWidth - container.clientWidth;
 
       container.scrollTo({
@@ -39,12 +34,21 @@ export default function RecommendationSection({
     }
   };
 
+  const brands = [
+    { name: "Corsair", logo: "/Corsair-logo.png" },
+    { name: "Sony", logo: "/sony-logo.png" },
+    { name: "Logitech", logo: "/Logitech Logo.png" },
+    { name: "Razer", logo: "/Razer Logo.png" },
+    { name: "Samsung", logo: "/samsung-logo.png" },
+    { name: "Dell", logo: "/dell-logo.png" },
+  ];
+
   return (
-    <div className="w-full max-w-[1360px] h-[458px] flex flex-col gap-8 opacity-100">
+    <div className="w-full max-w-[1360px] flex flex-col gap-8 opacity-100">
       {/* Header with Title and See All Button */}
       <div className="w-full h-10 flex items-center justify-between gap-2.5 opacity-100">
         <h2 className="flex-1 h-10 font-['Inter'] font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-[#FCFCFC] opacity-100">
-          Recomendation
+          Brand
         </h2>
         <Button
           variant="stroke"
@@ -59,18 +63,27 @@ export default function RecommendationSection({
           See All
         </Button>
       </div>
-      {/* Card List Container - Scrollable */}
+      {/* Brand List Container - Scrollable */}
       <div
         ref={scrollContainerRef}
-        className="w-screen -ml-10 pl-10 pr-10 h-[386px] scrollbar-hide relative z-10 overflow-x-auto overflow-y-hidden flex gap-8"
+        className="w-screen -ml-10 pl-10 pr-10 scrollbar-hide relative z-10 overflow-x-auto overflow-y-visible flex gap-8"
       >
-        {recommendations.map((product: any) => (
-          <div key={product.id} className="flex-shrink-0">
-            <ProductCard
-              imageUrl={product.imageUrl}
-              categoryName={product.category.name}
-              productName={product.name}
-              price={product.price}
+        {brands.map((brand) => (
+          <div
+            key={brand.name}
+            className="flex-shrink-0 w-[180px] lg:w-[220px]"
+          >
+            <IconCard
+              icon={
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={120}
+                  height={60}
+                  className="h-[60px] w-auto object-contain"
+                />
+              }
+              name={brand.name}
             />
           </div>
         ))}

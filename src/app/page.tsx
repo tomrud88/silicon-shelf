@@ -3,9 +3,10 @@ import MonitorIcon from "@/components/icons/MonitorIcon";
 import HeadphoneIcon from "@/components/icons/HeadphoneIcon";
 import KeyboardIcon from "@/components/icons/KeyboardIcon";
 import WebcamIcon from "@/components/icons/WebcamIcon";
-import CategoryCard from "@/components/CategoryCard";
+import IconCard from "@/components/IconCard";
 import CategoryCarousel from "@/components/CategoryCarousel";
 import RecommendationSection from "@/components/RecommendationSection";
+import BrandSection from "@/components/BrandSection";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
@@ -38,16 +39,19 @@ export default async function Home() {
             Category
           </h2>
           <div className="w-full max-w-[1360px] grid grid-cols-1 min-[440px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch opacity-100">
-            <CategoryCard icon={<MouseIcon />} name="Mouse" />
-            <CategoryCard icon={<MonitorIcon />} name="Monitor" />
-            <CategoryCard icon={<HeadphoneIcon />} name="Headphone" />
-            <CategoryCard icon={<KeyboardIcon />} name="Keyboard" />
-            <CategoryCard icon={<WebcamIcon />} name="Webcam" />
+            <IconCard icon={<MouseIcon />} name="Mouse" />
+            <IconCard icon={<MonitorIcon />} name="Monitor" />
+            <IconCard icon={<HeadphoneIcon />} name="Headphone" />
+            <IconCard icon={<KeyboardIcon />} name="Keyboard" />
+            <IconCard icon={<WebcamIcon />} name="Webcam" />
           </div>
         </div>
 
         {/* Recommendation Section */}
         <RecommendationSection recommendations={recommendations} />
+
+        {/* Brand Section */}
+        <BrandSection />
       </section>
     </main>
   );
