@@ -78,9 +78,9 @@ export default function Pagination({
   const pageNumbers = generatePageNumbers();
 
   return (
-    <div className="w-[997px] h-11 flex items-center justify-between opacity-100">
+    <div className="w-full max-w-[997px] h-auto min-h-11 flex flex-col sm:flex-row items-center justify-between gap-4 opacity-100">
       {/* Pagination Number List (Left) */}
-      <div className="flex items-center gap-2 opacity-100">
+      <div className="flex items-center gap-2 opacity-100 flex-wrap justify-center sm:justify-start">
         {pageNumbers.map((page, index) => {
           if (page === "...") {
             return (
@@ -113,7 +113,7 @@ export default function Pagination({
       </div>
 
       {/* Button List Container (Right) */}
-      <div className="w-[270px] h-11 flex items-center gap-8 opacity-100">
+      <div className="w-auto sm:w-[270px] h-11 flex items-center gap-4 sm:gap-8 opacity-100 flex-shrink-0">
         {/* Previous Button */}
         <Button
           variant="stroke"

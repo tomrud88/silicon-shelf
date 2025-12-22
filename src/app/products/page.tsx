@@ -98,9 +98,9 @@ export default async function ProductsPage({
 
       {/* Products Content */}
       {/* Layout Container */}
-      <div className="w-full max-w-[1441px] gap-[2px] opacity-100 mx-auto flex">
+      <div className="w-full max-w-[1441px] gap-[2px] opacity-100 mx-auto flex flex-col lg:flex-row">
         {/* Filter */}
-        <div className="w-[363px] flex flex-col gap-[52px] p-10 opacity-100">
+        <div className="w-full lg:w-[363px] flex-shrink-0 flex flex-col min-[670px]:flex-row lg:flex-col gap-6 lg:gap-[52px] p-10 opacity-100">
           {/* Category Filter */}
           <CategoryFilter selectedCategoryId={params.categoryId} />
 
@@ -109,14 +109,14 @@ export default async function ProductsPage({
         </div>
 
         {/* Vertical Divider */}
-        <div className="w-0 min-h-[1478px] border-l border-[#383B42] opacity-100"></div>
+        <div className="hidden lg:block w-0 min-h-[1478px] border-l border-[#383B42] opacity-100"></div>
 
         {/* Products Grid */}
-        <div className="w-[1077px] flex flex-col justify-between gap-12 p-10 opacity-100">
+        <div className="flex-1 flex flex-col justify-between gap-12 p-10 opacity-100">
           {/* Filter + Product Card List Container */}
-          <div className="w-[997px] flex flex-col gap-10 opacity-100">
+          <div className="w-full flex flex-col gap-10 opacity-100">
             {/* Filter/Sort Bar */}
-            <div className="w-[997px] h-11 flex items-center gap-[60px] opacity-100">
+            <div className="w-full h-auto flex flex-col min-[670px]:flex-row items-start min-[670px]:items-center gap-4 min-[670px]:gap-[60px] opacity-100">
               {/* Sorting Container */}
               <SortDropdown selectedSort={params.sort} />
 
@@ -125,7 +125,7 @@ export default async function ProductsPage({
             </div>
 
             {/* Product Grid */}
-            <div className="grid grid-cols-3 gap-x-6 gap-y-12">
+            <div className="grid gap-x-6 gap-y-12 justify-items-center min-[1400px]:justify-items-stretch [grid-template-columns:repeat(1,300px)] min-[670px]:[grid-template-columns:repeat(2,300px)] min-[1400px]:[grid-template-columns:repeat(3,300px)]">
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
