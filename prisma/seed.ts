@@ -6,6 +6,16 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Start seeding...");
 
+  // Clear existing data
+  console.log("Clearing existing data...");
+  await prisma.orderItem.deleteMany();
+  await prisma.order.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.category.deleteMany();
+  await prisma.brand.deleteMany();
+  await prisma.user.deleteMany();
+  console.log("✓ Data cleared");
+
   // Create Brands
   const logitech = await prisma.brand.create({
     data: {
@@ -46,8 +56,9 @@ async function main() {
   const mouseCategory = await prisma.category.create({
     data: {
       name: "Mouse",
-      description: "Gaming and office mice",
-      image: "/categories/mouse.jpg",
+      description:
+        "Premium gaming and office mice featuring cutting-edge sensors, customizable options, and ergonomic designs for competitive gaming and productivity excellence.",
+      carouselImage: "https://i.ibb.co/1G9CKZGC/mouse-img.png",
       exploreInfo: "Find the perfect mouse for your setup",
     },
   });
@@ -56,46 +67,51 @@ async function main() {
     data: [
       {
         name: "Logitech G502 HERO",
-        description: "High performance gaming mouse with 25K DPI sensor",
+        description:
+          "The Logitech G502 HERO is a high-performance gaming mouse featuring an advanced 25K DPI sensor for unmatched precision. Its customizable weight system and programmable buttons make it perfect for competitive gaming. The ergonomic design ensures comfort during extended gaming sessions.",
         price: 79.99,
         stock: 50,
-        imageUrl: "/products/logitech-g502.jpg",
+        imageUrl: "https://i.ibb.co/5Xy3GXc4/logitech-g502-hero.png",
         categoryId: mouseCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Razer DeathAdder V3",
-        description: "Ergonomic gaming mouse with optical switches",
+        description:
+          "The Razer DeathAdder V3 combines ergonomic excellence with cutting-edge optical switches. Its lightweight design and Focus Pro 30K optical sensor deliver lightning-fast response times. The comfortable grip shape fits perfectly in your hand for marathon gaming sessions.",
         price: 69.99,
         stock: 35,
-        imageUrl: "/products/razer-deathadder.jpg",
+        imageUrl: "https://i.ibb.co/99HqwTpF/Razer-Death-Adder-V3.png",
         categoryId: mouseCategory.id,
         brandId: razer.id,
       },
       {
         name: "Logitech MX Master 3S",
-        description: "Premium wireless mouse for productivity",
+        description:
+          "The Logitech MX Master 3S is the ultimate productivity mouse with its ultra-quiet clicks and electromagnetic scrolling. Its ergonomic shape supports your hand naturally, while the 8K DPI sensor works flawlessly on any surface including glass.",
         price: 99.99,
         stock: 25,
-        imageUrl: "/products/mx-master-3s.jpg",
+        imageUrl: "https://i.ibb.co/XPV6X0G/Logitech-MX-Master-3-S.png",
         categoryId: mouseCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Razer Viper Ultimate",
-        description: "Lightweight wireless gaming mouse",
+        description:
+          "The Razer Viper Ultimate is an ultra-lightweight wireless gaming mouse weighing just 74 grams. Its ambidextrous design and Focus+ 20K optical sensor provide exceptional accuracy. The HyperSpeed wireless technology ensures zero-lag performance during intense gameplay.",
         price: 129.99,
         stock: 20,
-        imageUrl: "/products/razer-viper.jpg",
+        imageUrl: "https://i.ibb.co/ns28SbHs/Razer-viper-ultimate.png",
         categoryId: mouseCategory.id,
         brandId: razer.id,
       },
       {
         name: "Logitech G Pro X Superlight",
-        description: "Ultra-lightweight wireless gaming mouse",
+        description:
+          "The Logitech G Pro X Superlight sets the standard for professional gaming mice at just 63 grams. Its HERO 25K sensor delivers pinpoint accuracy, while the symmetrical design suits all grip styles. Trusted by esports professionals worldwide for tournament-level performance.",
         price: 149.99,
         stock: 15,
-        imageUrl: "/products/g-pro-superlight.jpg",
+        imageUrl: "https://i.ibb.co/kVBm1drv/Logitech-G-Pro-X-Superlight.png",
         categoryId: mouseCategory.id,
         brandId: logitech.id,
       },
@@ -106,8 +122,9 @@ async function main() {
   const monitorCategory = await prisma.category.create({
     data: {
       name: "Monitor",
-      description: "High-quality displays for work and gaming",
-      image: "/categories/monitor.jpg",
+      description:
+        "High-performance monitors with 4K resolution, accurate colors, and high refresh rates for immersive gaming and professional work.",
+      carouselImage: "https://i.ibb.co/FqxQRk7K/monitor-big.png",
       exploreInfo: "Discover monitors with stunning visuals",
     },
   });
@@ -116,46 +133,51 @@ async function main() {
     data: [
       {
         name: "Dell UltraSharp U2723DE",
-        description: "27-inch 4K USB-C monitor",
+        description:
+          "The Dell UltraSharp U2723DE is a stunning 27-inch 4K monitor with USB-C connectivity for seamless productivity. Its IPS Black technology delivers incredible contrast, while the built-in KVM switch lets you control multiple devices. Perfect for professionals demanding color accuracy.",
         price: 599.99,
         stock: 12,
-        imageUrl: "/products/dell-ultrasharp.jpg",
+        imageUrl: "https://i.ibb.co/7x4CFMLg/Dell-Ultra-Sharp-U2723-DE.png",
         categoryId: monitorCategory.id,
         brandId: dell.id,
       },
       {
         name: "Dell S2722DGM",
-        description: "27-inch curved gaming monitor 165Hz",
+        description:
+          "The Dell S2722DGM features a curved 27-inch display with a blazing 165Hz refresh rate for smooth gaming. Its VA panel provides deep blacks and vibrant colors, while AMD FreeSync Premium eliminates screen tearing during intense gaming sessions.",
         price: 299.99,
         stock: 18,
-        imageUrl: "/products/dell-gaming.jpg",
+        imageUrl: "https://i.ibb.co/Q3FkZWfx/Dell-S2722-DGM.png",
         categoryId: monitorCategory.id,
         brandId: dell.id,
       },
       {
         name: "LG 27GP950-B",
-        description: "27-inch 4K 144Hz gaming monitor",
+        description:
+          "The LG 27GP950-B combines breathtaking 4K resolution with a fast 144Hz refresh rate for ultimate gaming immersion. Its Nano IPS display covers 98% of the DCI-P3 color space, while HDMI 2.1 support makes it perfect for next-gen console gaming.",
         price: 799.99,
         stock: 8,
-        imageUrl: "/products/lg-ultragear.jpg",
+        imageUrl: "https://i.ibb.co/RpBjr7P2/LG-27-GP950-B.png",
         categoryId: monitorCategory.id,
         brandId: null,
       },
       {
         name: "Samsung Odyssey G7",
-        description: "32-inch curved 240Hz gaming monitor",
+        description:
+          "The Samsung Odyssey G7 is a 32-inch curved gaming powerhouse with an aggressive 1000R curvature and 240Hz refresh rate. Its QLED panel delivers vibrant colors and deep contrast, while G-Sync compatibility ensures buttery smooth gameplay without tearing.",
         price: 699.99,
         stock: 10,
-        imageUrl: "/products/samsung-odyssey.jpg",
+        imageUrl: "https://i.ibb.co/PZnjh3qB/Samsung-Odyssey-G7.png",
         categoryId: monitorCategory.id,
         brandId: null,
       },
       {
         name: "ASUS ROG Swift PG279QM",
-        description: "27-inch 1440p 240Hz gaming monitor",
+        description:
+          "The ASUS ROG Swift PG279QM is built for competitive gaming with its 27-inch 1440p display and incredible 240Hz refresh rate. Fast IPS technology delivers stunning colors with minimal response time, while NVIDIA G-Sync ensures tear-free gaming at the highest level.",
         price: 649.99,
         stock: 14,
-        imageUrl: "/products/asus-rog.jpg",
+        imageUrl: "https://i.ibb.co/xq7T9TFh/mon-AOC-24g2e.png",
         categoryId: monitorCategory.id,
         brandId: null,
       },
@@ -166,8 +188,9 @@ async function main() {
   const headphoneCategory = await prisma.category.create({
     data: {
       name: "Headphone",
-      description: "Premium headphones for gaming and music",
-      image: "/categories/headphone.jpg",
+      description:
+        "Premium headphones with advanced noise cancellation, spatial audio, and crystal-clear sound for gaming, music, and all-day comfort.",
+      carouselImage: "https://i.ibb.co/F4b4ZT9f/headphones-big.png",
       exploreInfo: "Experience immersive sound quality",
     },
   });
@@ -176,46 +199,51 @@ async function main() {
     data: [
       {
         name: "Sony WH-1000XM5",
-        description: "Industry-leading noise canceling headphones",
+        description:
+          "The Sony WH-1000XM5 features industry-leading noise cancellation with eight microphones for crystal-clear calls. Its lightweight design and plush earpads provide all-day comfort, while 30-hour battery life keeps your music playing through long journeys and workdays.",
         price: 399.99,
         stock: 30,
-        imageUrl: "/products/sony-xm5.jpg",
+        imageUrl: "https://i.ibb.co/KcCKwF50/Sony-WH-1000-XM5.png",
         categoryId: headphoneCategory.id,
         brandId: sony.id,
       },
       {
         name: "Razer BlackShark V2",
-        description: "Gaming headset with THX Spatial Audio",
+        description:
+          "The Razer BlackShark V2 is a premium gaming headset featuring THX Spatial Audio for immersive 360-degree sound. Its Triforce titanium drivers deliver crystal-clear highs and punchy bass, while the breathable memory foam cushions ensure comfort during marathon gaming sessions.",
         price: 99.99,
         stock: 40,
-        imageUrl: "/products/razer-blackshark.jpg",
+        imageUrl: "https://i.ibb.co/1fxzdB49/Razer-Black-Shark-V2.png",
         categoryId: headphoneCategory.id,
         brandId: razer.id,
       },
       {
         name: "Corsair Virtuoso RGB Wireless",
-        description: "High-fidelity gaming headset",
+        description:
+          "The Corsair Virtuoso RGB Wireless combines audiophile-grade sound with gaming performance. Its custom-tuned 50mm neodymium drivers deliver exceptional audio fidelity, while the detachable broadcast-grade microphone ensures your voice is heard with pristine clarity.",
         price: 179.99,
         stock: 22,
-        imageUrl: "/products/corsair-virtuoso.jpg",
+        imageUrl: "https://i.ibb.co/Mk9DFT80/Corsair-Virtuoso-RGB-Wireless.png",
         categoryId: headphoneCategory.id,
         brandId: corsair.id,
       },
       {
         name: "Logitech G Pro X",
-        description: "Professional gaming headset",
+        description:
+          "The Logitech G Pro X is designed for esports professionals with Blue VO!CE microphone technology for broadcast-quality voice comms. Its swappable ear pads and precision-tuned drivers deliver tournament-grade audio, trusted by top competitive gamers worldwide.",
         price: 129.99,
         stock: 28,
-        imageUrl: "/products/logitech-pro-x.jpg",
+        imageUrl: "https://i.ibb.co/MxWQ36mn/Logitech-G-Pro-X.png",
         categoryId: headphoneCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Sony WH-CH720N",
-        description: "Wireless noise canceling headphones",
+        description:
+          "The Sony WH-CH720N offers excellent noise cancellation at an accessible price point. Its lightweight design weighs just 192 grams, while the 35-hour battery life and quick charging ensure you're never without your music for long periods.",
         price: 149.99,
         stock: 35,
-        imageUrl: "/products/sony-ch720n.jpg",
+        imageUrl: "https://i.ibb.co/bg0PMQdZ/Sony-WH-CH720-N.png",
         categoryId: headphoneCategory.id,
         brandId: sony.id,
       },
@@ -226,8 +254,9 @@ async function main() {
   const keyboardCategory = await prisma.category.create({
     data: {
       name: "Keyboard",
-      description: "Mechanical and gaming keyboards",
-      image: "/categories/keyboard.jpg",
+      description:
+        "Mechanical gaming keyboards with tactile switches, RGB lighting, and premium build quality for competitive gaming and productivity.",
+      carouselImage: "https://i.ibb.co/M01jBQp/keyboard-big.png",
       exploreInfo: "Type faster with premium keyboards",
     },
   });
@@ -236,46 +265,51 @@ async function main() {
     data: [
       {
         name: "Corsair K70 RGB PRO",
-        description: "Mechanical gaming keyboard with Cherry MX switches",
+        description:
+          "The Corsair K70 RGB PRO is a premium mechanical gaming keyboard featuring genuine Cherry MX switches for reliable performance. Its durable aluminum frame ensures stability during intense gaming, while per-key RGB lighting creates stunning visual effects to match your setup.",
         price: 169.99,
         stock: 25,
-        imageUrl: "/products/corsair-k70.jpg",
+        imageUrl: "https://i.ibb.co/LdNf3FJX/Corsair-K70-RGB-PRO.png",
         categoryId: keyboardCategory.id,
         brandId: corsair.id,
       },
       {
         name: "Razer BlackWidow V3",
-        description: "Mechanical gaming keyboard with green switches",
+        description:
+          "The Razer BlackWidow V3 features tactile green mechanical switches with satisfying clicks. Its transparent switch housing showcases brilliant RGB lighting, while the ergonomic wrist rest provides comfort during extended typing sessions and marathon gaming nights.",
         price: 139.99,
         stock: 30,
-        imageUrl: "/products/razer-blackwidow.jpg",
+        imageUrl: "https://i.ibb.co/wZ8YvcrS/Razer-Black-Widow-V3.png",
         categoryId: keyboardCategory.id,
         brandId: razer.id,
       },
       {
         name: "Logitech G915 TKL",
-        description: "Wireless mechanical gaming keyboard",
+        description:
+          "The Logitech G915 TKL is a wireless mechanical keyboard with ultra-low profile GL switches. Its LIGHTSPEED wireless technology provides 1ms response time, while the sleek aluminum design and 40-hour battery life make it perfect for minimalist gaming setups.",
         price: 229.99,
         stock: 15,
-        imageUrl: "/products/logitech-g915.jpg",
+        imageUrl: "https://i.ibb.co/8gjSQTJ3/Logitech-G915-TKL.png",
         categoryId: keyboardCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Corsair K65 RGB Mini",
-        description: "Compact 60% mechanical keyboard",
+        description:
+          "The Corsair K65 RGB Mini packs full-size performance into a compact 60% form factor. Its Cherry MX Speed switches deliver lightning-fast actuation, while the durable build quality and customizable RGB lighting make it ideal for space-conscious gamers.",
         price: 119.99,
         stock: 20,
-        imageUrl: "/products/corsair-k65.jpg",
+        imageUrl: "https://i.ibb.co/zjWFnxr/Corsair-K65-RGB-Mini.png",
         categoryId: keyboardCategory.id,
         brandId: corsair.id,
       },
       {
         name: "Razer Huntsman Mini",
-        description: "60% optical gaming keyboard",
+        description:
+          "The Razer Huntsman Mini features revolutionary optical switches with light-based actuation for incredible speed. Its compact 60% layout saves desk space, while the PBT keycaps provide excellent durability and a premium feel for competitive gaming enthusiasts.",
         price: 129.99,
         stock: 18,
-        imageUrl: "/products/razer-huntsman.jpg",
+        imageUrl: "https://i.ibb.co/fbtxMvR/razer-huntsman-elite.png",
         categoryId: keyboardCategory.id,
         brandId: razer.id,
       },
@@ -286,8 +320,9 @@ async function main() {
   const webcamCategory = await prisma.category.create({
     data: {
       name: "Webcam",
-      description: "HD webcams for streaming and video calls",
-      image: "/categories/webcam.jpg",
+      description:
+        "Professional webcams with Full HD and 4K resolution, autofocus, and light correction for streaming and video conferences.",
+      carouselImage: "https://i.ibb.co/KxLjmxsj/webcam-big.png",
       exploreInfo: "Look your best on video calls",
     },
   });
@@ -296,46 +331,51 @@ async function main() {
     data: [
       {
         name: "Logitech C920",
-        description: "Full HD 1080p webcam",
+        description:
+          "The Logitech C920 is the gold standard for Full HD 1080p video calls and streaming. Its autofocus lens and automatic light correction ensure you always look your best, while dual stereo microphones capture clear audio for professional video conferences.",
         price: 79.99,
         stock: 50,
-        imageUrl: "/products/logitech-c920.jpg",
+        imageUrl: "https://i.ibb.co/LdMmhXq7/Logitech-C920.png",
         categoryId: webcamCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Logitech StreamCam",
-        description: "Full HD 1080p 60fps streaming webcam",
+        description:
+          "The Logitech StreamCam delivers smooth Full HD 1080p video at 60fps for professional streaming. Its smart autofocus and auto-framing keep you centered in the shot, while the versatile mounting system works in both landscape and portrait orientations.",
         price: 169.99,
         stock: 25,
-        imageUrl: "/products/logitech-streamcam.jpg",
+        imageUrl: "https://i.ibb.co/Fk4hDJDj/Logitech-Stream-Cam.png",
         categoryId: webcamCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Razer Kiyo Pro",
-        description: "High-performance streaming webcam",
+        description:
+          "The Razer Kiyo Pro features an adaptive light sensor that performs exceptionally in any lighting condition. Its uncompressed 1080p 60fps video and wide-angle lens ensure you're always seen clearly, making it perfect for serious content creators.",
         price: 199.99,
         stock: 20,
-        imageUrl: "/products/razer-kiyo.jpg",
+        imageUrl: "https://i.ibb.co/N63vzJq7/Razer-Kiyo-Pro.png",
         categoryId: webcamCategory.id,
         brandId: razer.id,
       },
       {
         name: "Logitech Brio 4K",
-        description: "4K Ultra HD webcam with HDR",
+        description:
+          "The Logitech Brio 4K delivers stunning Ultra HD video with HDR support for incredible detail and color. Its advanced optics with 5x digital zoom and multiple field-of-view options make it the ultimate choice for demanding professionals.",
         price: 199.99,
         stock: 15,
-        imageUrl: "/products/logitech-brio.jpg",
+        imageUrl: "https://i.ibb.co/xKJG3x0R/Logitech-Brio-4-K.png",
         categoryId: webcamCategory.id,
         brandId: logitech.id,
       },
       {
         name: "Razer Kiyo",
-        description: "Full HD streaming webcam with ring light",
+        description:
+          "The Razer Kiyo features a built-in adjustable ring light that ensures perfect illumination in any environment. Its Full HD 1080p streaming capability and easy setup make it ideal for streamers who want professional results without complex lighting setups.",
         price: 99.99,
         stock: 30,
-        imageUrl: "/products/razer-kiyo-base.jpg",
+        imageUrl: "https://i.ibb.co/Fkt7dbpH/Razer-Kiyo.png",
         categoryId: webcamCategory.id,
         brandId: razer.id,
       },

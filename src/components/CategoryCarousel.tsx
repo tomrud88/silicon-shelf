@@ -67,7 +67,7 @@ export default function CategoryCarousel({
 
           {/* Category Image */}
           <img
-            src={currentCategory.image || "/monitor-big.png"}
+            src={currentCategory.carouselImage || "/monitor-big.png"}
             alt={currentCategory.name}
             className="w-[300px] h-[243px] md:w-[400px] md:h-[324px] lg:w-[582.61px] lg:h-[472.68px]"
             style={{ transform: "rotate(-2.55deg)" }}

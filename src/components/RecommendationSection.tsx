@@ -67,6 +67,7 @@ export default function RecommendationSection({
         {recommendations.map((product: any) => (
           <div key={product.id} className="flex-shrink-0">
             <ProductCard
+              id={product.id}
               imageUrl={product.imageUrl}
               categoryName={product.category.name}
               productName={product.name}

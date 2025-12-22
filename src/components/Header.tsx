@@ -1,9 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import CartIcon from "./icons/CartIcon";
 import ProfileIcon from "./icons/ProfileIcon";
 
 export default function Header() {
+  const handleNavClick = (label: string, href: string) => {
+    // Clear navigation history when clicking main nav items
+    if (href === "/" || href === "/products") {
+      sessionStorage.setItem("navigationHistory", JSON.stringify([]));
+    }
+  };
+
   return (
     <header className="w-full bg-[#1A1A1A]">
       <div className="max-w-[1440px] mx-auto px-10 py-8 flex flex-col gap-10">
@@ -24,13 +33,31 @@ export default function Header() {
         </div>
         <nav className="flex gap-8 list-none">
           <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--primary-500)]">
-            Home
+            <Link
+              href="/"
+              onClick={() => handleNavClick("Home", "/")}
+              className="hover:text-[#F29145] transition-colors"
+            >
+              Home
+            </Link>
           </li>
           <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
-            Product
+            <Link
+              href="/products"
+              onClick={() => handleNavClick("Products", "/products")}
+              className="hover:text-[#F29145] transition-colors"
+            >
+              Product
+            </Link>
           </li>
           <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
-            Contact
+            <Link
+              href="/contact"
+              onClick={() => handleNavClick("Contact", "/contact")}
+              className="hover:text-[#F29145] transition-colors"
+            >
+              Contact
+            </Link>
           </li>
         </nav>
         <hr className="w-[1360px] border-t border-[#383B42]" />
