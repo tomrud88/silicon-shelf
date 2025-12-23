@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Button from "@/components/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
@@ -29,6 +30,24 @@ export default function CategoryCarousel({
     setCurrentIndex((prev) => (prev === categories.length - 1 ? 0 : prev + 1));
   };
 
+  const handleExploreCategoryClick = () => {
+    // Save current page (Home) to navigation history
+    const historyJson = sessionStorage.getItem("navigationHistory");
+    const history = historyJson ? JSON.parse(historyJson) : [];
+
+    const homeItem = { label: "Home", href: "/" };
+
+    // Avoid adding the same page twice in a row
+    if (
+      history.length === 0 ||
+      history[history.length - 1].href !== homeItem.href
+    ) {
+      history.push(homeItem);
+    }
+
+    sessionStorage.setItem("navigationHistory", JSON.stringify(history));
+  };
+
   const currentCategory = categories[currentIndex];
 
   if (!currentCategory) return null;
@@ -55,14 +74,19 @@ export default function CategoryCarousel({
                 {currentCategory.description || currentCategory.exploreInfo}
               </p>
             </div>
-            <Button
-              variant="stroke"
-              size="xl"
-              rightIcon={<ArrowRightIcon />}
-              className="w-[211px] h-[54px]"
+            <Link
+              href={`/products?categoryId=${currentCategory.id}`}
+              onClick={handleExploreCategoryClick}
             >
-              Explore category
-            </Button>
+              <Button
+                variant="stroke"
+                size="xl"
+                rightIcon={<ArrowRightIcon />}
+                className="w-[211px] h-[54px]"
+              >
+                Explore category
+              </Button>
+            </Link>
           </div>
 
           {/* Category Image */}

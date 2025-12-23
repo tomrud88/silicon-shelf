@@ -6,6 +6,7 @@ import SortDropdown from "@/components/SortDropdown";
 import PriceFilter from "@/components/PriceFilter";
 import ShowDropdown from "@/components/ShowDropdown";
 import Pagination from "@/components/Pagination";
+import ProductsBreadcrumb from "@/components/ProductsBreadcrumb";
 
 interface Product {
   id: string;
@@ -91,6 +92,9 @@ export default async function ProductsPage({
   );
   return (
     <main className="w-full overflow-x-hidden">
+      {/* Breadcrumb */}
+      <ProductsBreadcrumb />
+
       {/* Horizontal Divider Container */}
       <div className="max-w-[1440px] h-10 mx-auto pt-10 opacity-100">
         <div className="w-full h-0 border-t border-[#383B42] opacity-100"></div>

@@ -2,10 +2,15 @@
 
 import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation";
 import CartIcon from "./icons/CartIcon";
 import ProfileIcon from "./icons/ProfileIcon";
+import Button from "./Button";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isAuthPage = pathname === "/register" || pathname === "/login";
+
   const handleNavClick = (label: string, href: string) => {
     // Clear navigation history when clicking main nav items
     if (href === "/" || href === "/products") {
@@ -22,44 +27,54 @@ export default function Header() {
             alt="SiliconShelf"
             className="w-[210px] h-[80px]"
           />
-          <div className="flex gap-7 items-center w-[92px] h-10">
-            <Link href="/cart">
-              <CartIcon />
+          {isAuthPage ? (
+            <Link href="/login">
+              <Button variant="fill" size="xl" className="w-[121px] h-[54px]">
+                Sign In
+              </Button>
             </Link>
-            <Link href="/profile">
-              <ProfileIcon />
-            </Link>
-          </div>
+          ) : (
+            <div className="flex gap-7 items-center w-[92px] h-10">
+              <Link href="/cart">
+                <CartIcon />
+              </Link>
+              <Link href="/profile">
+                <ProfileIcon />
+              </Link>
+            </div>
+          )}
         </div>
-        <nav className="flex gap-8 list-none">
-          <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--primary-500)]">
-            <Link
-              href="/"
-              onClick={() => handleNavClick("Home", "/")}
-              className="hover:text-[#F29145] transition-colors"
-            >
-              Home
-            </Link>
-          </li>
-          <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
-            <Link
-              href="/products"
-              onClick={() => handleNavClick("Products", "/products")}
-              className="hover:text-[#F29145] transition-colors"
-            >
-              Product
-            </Link>
-          </li>
-          <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
-            <Link
-              href="/contact"
-              onClick={() => handleNavClick("Contact", "/contact")}
-              className="hover:text-[#F29145] transition-colors"
-            >
-              Contact
-            </Link>
-          </li>
-        </nav>
+        {!isAuthPage && (
+          <nav className="flex gap-8 list-none">
+            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--primary-500)]">
+              <Link
+                href="/"
+                onClick={() => handleNavClick("Home", "/")}
+                className="hover:text-[#F29145] transition-colors"
+              >
+                Home
+              </Link>
+            </li>
+            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
+              <Link
+                href="/products"
+                onClick={() => handleNavClick("Products", "/products")}
+                className="hover:text-[#F29145] transition-colors"
+              >
+                Product
+              </Link>
+            </li>
+            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
+              <Link
+                href="/contact"
+                onClick={() => handleNavClick("Contact", "/contact")}
+                className="hover:text-[#F29145] transition-colors"
+              >
+                Contact
+              </Link>
+            </li>
+          </nav>
+        )}
         <hr className="w-[1360px] border-t border-[#383B42]" />
       </div>
     </header>

@@ -64,13 +64,13 @@ export default async function ProductDetailPage({
       <BreadcrumbNav productName={product.name} />
 
       {/* Product Detail Container */}
-      <div className="w-full max-w-[1440px] min-h-[628px] mx-auto flex gap-8 opacity-100 p-10">
+      <div className="w-full max-w-[1440px] min-h-[628px] mx-auto flex flex-wrap gap-8 opacity-100 p-10 max-[460px]:p-0 max-[460px]:gap-4">
         {/* Product Description Container */}
-        <div className="w-[889px] h-[548px] flex flex-col gap-12 opacity-100">
+        <div className="w-[889px] max-w-full min-h-[548px] flex flex-col gap-12 opacity-100">
           {/* Image + Product Info Container */}
-          <div className="w-[889px] h-[500px] flex gap-10 opacity-100">
+          <div className="w-[889px] max-w-full h-auto flex flex-wrap gap-10 opacity-100">
             {/* Image Container */}
-            <div className="w-[422px] h-[472px] flex flex-col gap-8 opacity-100">
+            <div className="w-[422px] max-w-full h-[472px] flex flex-col gap-8 opacity-100">
               {/* Main Image */}
               <div className="w-[422px] h-[341px] rounded-[6px] flex gap-[10px] opacity-100 p-3 border border-[#383B42] bg-[#262626]">
                 <img
@@ -164,16 +164,16 @@ export default async function ProductDetailPage({
               </div>
             </div>
           </div>
-
-          {/* Horizontal Divider Container */}
-          <div className="w-[889px] h-auto flex gap-[10px] opacity-100">
-            {/* Divider */}
-            <div className="w-[889px] h-0 border-t border-[#383B42] opacity-100"></div>
-          </div>
         </div>
 
         {/* Add to Cart Container */}
         <AddToCartSection price={product.price} stock={product.stock} />
+
+        {/* Horizontal Divider Container */}
+        <div className="w-full h-auto flex gap-[10px] opacity-100">
+          {/* Divider */}
+          <div className="w-full h-0 border-t border-[#383B42] opacity-100"></div>
+        </div>
       </div>
     </main>
   );

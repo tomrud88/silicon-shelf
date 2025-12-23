@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface ProductCardProps {
   id?: string;
@@ -19,6 +19,7 @@ export default function ProductCard({
   price,
 }: ProductCardProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const handleClick = () => {
     // Get current navigation history
@@ -31,7 +32,14 @@ export default function ProductCard({
     if (pathname === "/") {
       currentPage = { label: "Home", href: "/" };
     } else if (pathname === "/products") {
-      currentPage = { label: "Products", href: "/products" };
+      const categoryId = searchParams.get("categoryId");
+      const fullPath = categoryId
+        ? `${pathname}?categoryId=${categoryId}`
+        : pathname;
+
+      // Get category name if available
+      const label = categoryName ? `Products - ${categoryName}` : "Products";
+      currentPage = { label, href: fullPath };
     }
 
     // Add current page to history if it has a label
