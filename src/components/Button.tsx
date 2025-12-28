@@ -7,6 +7,7 @@ interface ButtonProps {
   rightIcon?: React.ReactNode;
   onClick?: () => void;
   className?: string; // Dodatkowe klasy, np. dla width/height
+  type?: "button" | "submit" | "reset";
 }
 
 export default function Button({
@@ -18,12 +19,18 @@ export default function Button({
   rightIcon,
   onClick,
   className = "",
+  type = "button",
 }: ButtonProps) {
   const baseClasses =
     "font-medium rounded-md transition-all inline-flex items-center justify-center";
 
+  // Check if className contains a text color
+  const hasCustomTextColor = className.includes("text-");
+
   const variantClasses = {
-    fill: "bg-[#EE701D] text-white hover:bg-[#E05816]",
+    fill: `bg-[#EE701D] ${
+      hasCustomTextColor ? "" : "text-white"
+    } hover:bg-[#E05816]`,
     stroke:
       "bg-transparent text-[#EE701D] border border-[#EE701D] hover:text-[#F29145] hover:border-[#F29145]",
   };
@@ -35,6 +42,7 @@ export default function Button({
 
   return (
     <button
+      type={type}
       className={`${baseClasses} ${variantClasses[variant]} ${
         sizeClasses[size]
       } ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`}

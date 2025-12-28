@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SessionProvider } from "next-auth/react";
+import AuthGuard from "@/components/AuthGuard";
+import { NotificationProvider } from "@/contexts/NotificationContext";
+import NotificationDisplay from "@/components/NotificationDisplay";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,9 +29,16 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased bg-[#1A1A1A] overflow-x-hidden`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <SessionProvider>
+          <NotificationProvider>
+            <AuthGuard>
+              <Header />
+              <NotificationDisplay />
+              {children}
+              <Footer />
+            </AuthGuard>
+          </NotificationProvider>
+        </SessionProvider>
       </body>
     </html>
   );
