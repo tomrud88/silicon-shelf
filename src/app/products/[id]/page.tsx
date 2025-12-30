@@ -167,7 +167,14 @@ export default async function ProductDetailPage({
         </div>
 
         {/* Add to Cart Container */}
-        <AddToCartSection price={product.price} stock={product.stock} />
+        <AddToCartSection
+          productId={product.id}
+          productName={product.name}
+          productImage={product.imageUrl}
+          categoryName={product.category.name}
+          price={product.price}
+          stock={product.stock}
+        />
 
         {/* Horizontal Divider Container */}
         <div className="w-full h-auto flex gap-[10px] opacity-100">

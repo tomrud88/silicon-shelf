@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import AuthGuard from "@/components/AuthGuard";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import NotificationDisplay from "@/components/NotificationDisplay";
+import { CartProvider } from "@/contexts/CartContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -30,14 +31,16 @@ export default function RootLayout({
         className={`${inter.variable} antialiased bg-[#1A1A1A] overflow-x-hidden`}
       >
         <SessionProvider>
-          <NotificationProvider>
-            <AuthGuard>
-              <Header />
-              <NotificationDisplay />
-              {children}
-              <Footer />
-            </AuthGuard>
-          </NotificationProvider>
+          <CartProvider>
+            <NotificationProvider>
+              <AuthGuard>
+                <Header />
+                <NotificationDisplay />
+                {children}
+                <Footer />
+              </AuthGuard>
+            </NotificationProvider>
+          </CartProvider>
         </SessionProvider>
       </body>
     </html>

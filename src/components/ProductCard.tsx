@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
+import { useNotification } from "@/contexts/NotificationContext";
 
 interface ProductCardProps {
   id?: string;
@@ -20,6 +22,8 @@ export default function ProductCard({
 }: ProductCardProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { addToCart } = useCart();
+  const { showNotification } = useNotification();
 
   const handleClick = () => {
     // Get current navigation history
@@ -57,6 +61,23 @@ export default function ProductCard({
     sessionStorage.setItem("navigationHistory", JSON.stringify(history));
   };
 
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Stop link navigation
+    e.stopPropagation(); // Stop event bubbling
+
+    if (!id) return;
+
+    await addToCart({
+      id,
+      name: productName,
+      price,
+      imageUrl,
+      category: categoryName,
+    });
+
+    showNotification("Product Successfully Added");
+  };
+
   return (
     <Link
       href={`/products/${id}`}
@@ -71,9 +92,12 @@ export default function ProductCard({
           className="w-[268px] h-[204px] rounded-[6px] opacity-100 object-cover"
         />
         {/* Cart Icon */}
-        <div className="absolute top-3 left-3 w-8 h-8 rounded-[6px] bg-[#262626] flex items-center justify-center gap-[10px] p-1 opacity-100">
+        <button
+          onClick={handleAddToCart}
+          className="absolute top-3 left-3 w-8 h-8 rounded-[6px] bg-[#262626] flex items-center justify-center gap-[10px] p-1 opacity-100 hover:bg-[#F29145] transition-colors z-10"
+        >
           <img src="/cart-4.svg" alt="Add to cart" className="w-6 h-6 invert" />
-        </div>
+        </button>
       </div>
       {/* Product Details */}
       <div className="w-[268px] h-32 flex flex-col gap-4 opacity-100">

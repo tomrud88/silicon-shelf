@@ -6,17 +6,29 @@ import CheckIcon from "@/components/icons/CheckIcon";
 import MinusIcon from "@/components/icons/MinusIcon";
 import PlusIcon from "@/components/icons/PlusIcon";
 import CartIcon from "@/components/icons/CartIcon";
+import { useCart } from "@/contexts/CartContext";
+import { useNotification } from "@/contexts/NotificationContext";
 
 interface AddToCartSectionProps {
+  productId: string;
+  productName: string;
+  productImage: string;
+  categoryName: string;
   price: number;
   stock: number;
 }
 
 export default function AddToCartSection({
+  productId,
+  productName,
+  productImage,
+  categoryName,
   price,
   stock,
 }: AddToCartSectionProps) {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const { showNotification } = useNotification();
 
   const handleIncrement = () => {
     if (quantity < stock) {
@@ -28,6 +40,18 @@ export default function AddToCartSection({
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
+  };
+
+  const handleAddToCart = async () => {
+    await addToCart({
+      id: productId,
+      name: productName,
+      price,
+      imageUrl: productImage,
+      category: categoryName,
+    });
+
+    showNotification("Product Successfully Added");
   };
 
   const subtotal = price * quantity;
@@ -115,6 +139,7 @@ export default function AddToCartSection({
         size="xl"
         className="w-[375px] h-[54px] rounded-[6px] gap-[14px] py-[14px] px-5 border-[#F29145] text-[#F29145] hover:bg-[#1a1a1a]"
         rightIcon={<CartIcon className="text-[#F29145]" />}
+        onClick={handleAddToCart}
       >
         <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center">
           Add to cart
