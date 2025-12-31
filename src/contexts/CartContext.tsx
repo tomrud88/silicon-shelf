@@ -11,6 +11,7 @@ import {
 // Types
 export interface CartItem {
   id: string;
+  productId: string;
   name: string;
   price: number;
   imageUrl: string;
@@ -48,6 +49,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         const items =
           data.items?.map((item: any) => ({
             id: item.id,
+            productId: item.product.id,
             name: item.product.name,
             price: item.product.price,
             imageUrl: item.product.imageUrl,

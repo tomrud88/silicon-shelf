@@ -199,11 +199,13 @@ export default function CartPage() {
                 </div>
 
                 {/* Checkout Button */}
-                <button className="w-[375px] max-[430px]:w-[296px] h-[54px] rounded-[6px] gap-[14px] opacity-100 py-[14px] px-5 bg-[#F29145] hover:bg-[#E17F33] transition-colors">
-                  <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center align-middle text-[#262626]">
-                    Checkout
-                  </span>
-                </button>
+                <Link href="/checkout">
+                  <button className="w-[375px] max-[430px]:w-[296px] h-[54px] rounded-[6px] gap-[14px] opacity-100 py-[14px] px-5 bg-[#F29145] hover:bg-[#E17F33] transition-colors">
+                    <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center align-middle text-[#262626]">
+                      Checkout
+                    </span>
+                  </button>
+                </Link>
               </div>
             </div>
           )}
