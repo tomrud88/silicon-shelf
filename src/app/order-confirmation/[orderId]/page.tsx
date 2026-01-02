@@ -59,7 +59,9 @@ export default function OrderConfirmationPage() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="text-[#FCFCFC] text-xl">Loading order details...</div>
+        <div className="text-[var(--text-primary)] text-xl">
+          Loading order details...
+        </div>
       </div>
     );
   }
@@ -67,7 +69,7 @@ export default function OrderConfirmationPage() {
   if (error || !order) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="text-[#FCFCFC] text-xl">
+        <div className="text-[var(--text-primary)] text-xl">
           Error: {error || "Order not found"}
         </div>
       </div>
@@ -86,13 +88,13 @@ export default function OrderConfirmationPage() {
           </div>
 
           {/* Thanks Text */}
-          <h1 className="font-['Inter'] font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-center text-[#FCFCFC] whitespace-nowrap">
+          <h1 className="font-['Inter'] font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-center text-[var(--text-primary)] whitespace-nowrap">
             Thanks for Your Order!
           </h1>
         </div>
 
         {/* 2. Order ID Text */}
-        <p className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center text-[#E7E7E7]">
+        <p className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center text-[var(--text-secondary)]">
           {orderId}
         </p>
 
@@ -100,10 +102,10 @@ export default function OrderConfirmationPage() {
         <div className="w-[592px] min-h-[1090px] gap-6 opacity-100 flex flex-col mt-6">
           {/* Transaction Date */}
           <div className="w-[592px] h-[70px] gap-4 opacity-100 flex flex-col">
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Transaction Date
             </span>
-            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
               {new Date(order.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -117,10 +119,10 @@ export default function OrderConfirmationPage() {
 
           {/* Payment Method */}
           <div className="w-[592px] h-[70px] gap-4 opacity-100 flex flex-col">
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Payment Method
             </span>
-            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
               {order.paymentMethod}
             </span>
           </div>
@@ -130,10 +132,10 @@ export default function OrderConfirmationPage() {
 
           {/* Shipping Method */}
           <div className="w-[592px] h-[70px] gap-4 opacity-100 flex flex-col">
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Shipping Method
             </span>
-            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+            <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
               {order.shippingMethod}
             </span>
           </div>
@@ -144,7 +146,7 @@ export default function OrderConfirmationPage() {
           {/* Your Order Container */}
           <div className="w-[592px] min-h-[390px] gap-4 opacity-100 flex flex-col">
             {/* Your Order Title */}
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Your Order
             </span>
 
@@ -168,7 +170,7 @@ export default function OrderConfirmationPage() {
                   {/* Label + Badge Container */}
                   <div className="w-full gap-3 flex flex-col">
                     {/* Product Name */}
-                    <span className="font-['Inter'] font-medium text-[20px] leading-[30px] tracking-[-0.01em] text-[#FCFCFC]">
+                    <span className="font-['Inter'] font-medium text-[20px] leading-[30px] tracking-[-0.01em] text-[var(--text-primary)]">
                       {item.product.name}
                     </span>
 
@@ -183,12 +185,12 @@ export default function OrderConfirmationPage() {
                   {/* Price + Quantity Container */}
                   <div className="w-full flex justify-between items-center">
                     {/* Price */}
-                    <span className="font-['Inter'] font-medium text-[24px] leading-[36px] tracking-[-0.01em] text-[#FCFCFC]">
+                    <span className="font-['Inter'] font-medium text-[24px] leading-[36px] tracking-[-0.01em] text-[var(--text-primary)]">
                       ${item.price.toFixed(2)}
                     </span>
 
                     {/* Quantity Display */}
-                    <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+                    <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                       x{item.quantity}
                     </span>
                   </div>
@@ -198,12 +200,12 @@ export default function OrderConfirmationPage() {
 
             {/* Total Product Price */}
             <div className="w-full h-[28px] flex justify-between items-center">
-              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 Total Product Price (
                 {order.items.reduce((sum, item) => sum + item.quantity, 0)}{" "}
                 Items)
               </span>
-              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                 $
                 {order.items
                   .reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -213,10 +215,10 @@ export default function OrderConfirmationPage() {
 
             {/* Total Product Protection */}
             <div className="w-full h-[28px] flex justify-between items-center">
-              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 Total Product Protection
               </span>
-              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                 $
                 {(order.productProtection ? order.items.length * 1 : 0).toFixed(
                   2
@@ -226,20 +228,20 @@ export default function OrderConfirmationPage() {
 
             {/* Total Shipping Price */}
             <div className="w-full h-[28px] flex justify-between items-center">
-              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 Total Shipping Price
               </span>
-              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                 $5.00
               </span>
             </div>
 
             {/* Shipping Insurance */}
             <div className="w-full h-[28px] flex justify-between items-center">
-              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 Shipping Insurance
               </span>
-              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                 $6.00
               </span>
             </div>
@@ -251,16 +253,16 @@ export default function OrderConfirmationPage() {
           {/* Transaction Fees Container */}
           <div className="w-[592px] h-[72px] gap-4 opacity-100 flex flex-col">
             {/* Transaction Fees Title */}
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Transaction Fees
             </span>
 
             {/* Service Fees Row */}
             <div className="w-[592px] h-[28px] flex justify-between items-center opacity-100">
-              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#E7E7E7]">
+              <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 Service Fees
               </span>
-              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                 $0.50
               </span>
             </div>
@@ -271,17 +273,17 @@ export default function OrderConfirmationPage() {
 
           {/* Grand Total Container */}
           <div className="w-[592px] h-[40px] flex justify-between items-center opacity-100">
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Grand Total
             </span>
-            <span className="font-['Inter'] font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-[var(--text-primary)]">
               ${order.totalAmount.toFixed(2)}
             </span>
           </div>
 
           {/* Status Container */}
           <div className="w-[592px] h-[36px] flex justify-between items-center opacity-100">
-            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
+            <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
               Status
             </span>
             <div className="w-[77px] h-[36px] rounded-[6px] gap-[10px] py-[6px] px-[10px] bg-[#295B40] flex items-center justify-center">

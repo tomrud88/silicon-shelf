@@ -12,6 +12,12 @@
   --woodsmoke: #141316;
   --black: #000000;
 
+  /* Typography colors */
+  --text-primary: #fcfcfc;
+  --text-secondary: #e7e7e7;
+  --text-tertiary: #b0b0b0;
+  --text-placeholder: #848a97;
+
   /* Green Everglade */
   --green-everglade-50: #e9edeb;
   --green-everglade-100: #bac7bf;
