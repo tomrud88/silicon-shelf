@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import CheckIcon from "@/components/icons/CheckIcon";
 import ShieldCrossIcon from "@/components/icons/ShieldCrossIcon";
@@ -16,12 +16,99 @@ export default function CheckoutPage() {
   const [addressTab, setAddressTab] = useState<"existing" | "new">("existing");
   const [mainAddress, setMainAddress] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [existingAddress, setExistingAddress] = useState({
+    address: "",
+    province: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
+  const [newAddressForm, setNewAddressForm] = useState({
+    country: "",
+    province: "",
+    city: "",
+    postalCode: "",
+    completeAddress: "",
+  });
+
+  const fetchUserAddress = async () => {
+    try {
+      const response = await fetch("/api/user/address");
+      if (response.ok) {
+        const data = await response.json();
+        setExistingAddress({
+          address: data.address || "",
+          province: data.province || "",
+          city: data.city || "",
+          postalCode: data.postalCode || "",
+          country: data.country || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching address:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserAddress();
+  }, []);
 
   const toggleProtection = (itemId: string) => {
     setProtectionStates((prev) => ({
       ...prev,
       [itemId]: !prev[itemId],
     }));
+  };
+
+  const handleSaveAddress = async () => {
+    // Walidacja formularza
+    if (
+      !newAddressForm.country ||
+      !newAddressForm.city ||
+      !newAddressForm.postalCode ||
+      !newAddressForm.completeAddress
+    ) {
+      alert("Please fill in all required address fields");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/user/address", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          address: newAddressForm.completeAddress,
+          city: newAddressForm.city,
+          postalCode: newAddressForm.postalCode,
+          country: newAddressForm.country,
+          province: newAddressForm.province,
+          isMainAddress: mainAddress,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to save address");
+      }
+
+      alert("Address saved successfully!");
+      // Odśwież dane existing address
+      await fetchUserAddress();
+      // Opcjonalnie przełącz na existing address tab
+      if (mainAddress) {
+        setAddressTab("existing");
+      }
+    } catch (error) {
+      console.error("Error saving address:", error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Failed to save address. Please try again."
+      );
+    }
   };
 
   const handleCheckout = async () => {
@@ -334,7 +421,7 @@ export default function CheckoutPage() {
 
                         {/* Complete Address Text */}
                         <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
-                          Bangalau Road No 23, RT 4/RW 6, Kinajaya
+                          {existingAddress.address || "No address saved"}
                         </span>
                       </div>
 
@@ -346,7 +433,7 @@ export default function CheckoutPage() {
                             Country
                           </span>
                           <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
-                            Indonesia
+                            {existingAddress.country || "-"}
                           </span>
                         </div>
 
@@ -356,7 +443,7 @@ export default function CheckoutPage() {
                             Province
                           </span>
                           <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
-                            Jakarta
+                            {existingAddress.province || "-"}
                           </span>
                         </div>
 
@@ -366,7 +453,7 @@ export default function CheckoutPage() {
                             City
                           </span>
                           <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
-                            Jakarta
+                            {existingAddress.city || "-"}
                           </span>
                         </div>
 
@@ -376,7 +463,7 @@ export default function CheckoutPage() {
                             Postal Code
                           </span>
                           <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[#FCFCFC]">
-                            12819
+                            {existingAddress.postalCode || "-"}
                           </span>
                         </div>
                       </div>
@@ -388,11 +475,25 @@ export default function CheckoutPage() {
                         <input
                           type="text"
                           placeholder="Country"
+                          value={newAddressForm.country}
+                          onChange={(e) =>
+                            setNewAddressForm({
+                              ...newAddressForm,
+                              country: e.target.value,
+                            })
+                          }
                           className="w-[400px] h-[54px] rounded-[6px] opacity-100 px-4 py-[14px] bg-[#262626] border border-[#616674] text-[#FCFCFC] font-['Inter'] font-medium placeholder:text-[#848A97]"
                         />
                         <input
                           type="text"
                           placeholder="Province"
+                          value={newAddressForm.province}
+                          onChange={(e) =>
+                            setNewAddressForm({
+                              ...newAddressForm,
+                              province: e.target.value,
+                            })
+                          }
                           className="w-[400px] h-[54px] rounded-[6px] opacity-100 px-4 py-[14px] bg-[#262626] border border-[#616674] text-[#FCFCFC] font-['Inter'] font-medium placeholder:text-[#848A97]"
                         />
                       </div>
@@ -402,11 +503,25 @@ export default function CheckoutPage() {
                         <input
                           type="text"
                           placeholder="City"
+                          value={newAddressForm.city}
+                          onChange={(e) =>
+                            setNewAddressForm({
+                              ...newAddressForm,
+                              city: e.target.value,
+                            })
+                          }
                           className="w-[400px] h-[54px] rounded-[6px] opacity-100 px-4 py-[14px] bg-[#262626] border border-[#616674] text-[#FCFCFC] font-['Inter'] font-medium placeholder:text-[#848A97]"
                         />
                         <input
                           type="text"
                           placeholder="Postal Code"
+                          value={newAddressForm.postalCode}
+                          onChange={(e) =>
+                            setNewAddressForm({
+                              ...newAddressForm,
+                              postalCode: e.target.value,
+                            })
+                          }
                           className="w-[400px] h-[54px] rounded-[6px] opacity-100 px-4 py-[14px] bg-[#262626] border border-[#616674] text-[#FCFCFC] font-['Inter'] font-medium placeholder:text-[#848A97]"
                         />
                       </div>
@@ -414,13 +529,26 @@ export default function CheckoutPage() {
                       {/* Third Row - Complete Address */}
                       <textarea
                         placeholder="Complete Address"
+                        value={newAddressForm.completeAddress}
+                        onChange={(e) =>
+                          setNewAddressForm({
+                            ...newAddressForm,
+                            completeAddress: e.target.value,
+                          })
+                        }
                         className="w-full max-w-[841px] h-[130px] rounded-[6px] opacity-100 px-4 py-[14px] bg-[#262626] border border-[#616674] text-[#FCFCFC] font-['Inter'] font-medium placeholder:text-[#848A97] resize-none"
                       />
 
                       {/* Checkbox Container */}
                       <div
                         className="w-[234px] h-[26px] gap-4 opacity-100 flex items-center cursor-pointer"
-                        onClick={() => setMainAddress(!mainAddress)}
+                        onClick={async () => {
+                          const newValue = !mainAddress;
+                          setMainAddress(newValue);
+                          if (newValue) {
+                            await handleSaveAddress();
+                          }
+                        }}
                       >
                         {/* Checkbox */}
                         <div
