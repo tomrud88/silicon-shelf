@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
@@ -10,6 +11,7 @@ interface Category {
   name: string;
   description: string | null;
   image: string | null;
+  carouselImage?: string | null;
   exploreInfo: string | null;
 }
 
@@ -62,7 +64,7 @@ export default function CategoryCarousel({
             onClick={handlePrevious}
             className="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-r-md flex items-center justify-center transition-all z-10"
           >
-            <img src="/shape-left.svg" alt="Previous" className="w-2 h-4" />
+            <Image src="/shape-left.svg" alt="Previous" width={8} height={16} />
           </button>
 
           <div className="w-full max-w-[433px] flex flex-col gap-6 lg:gap-10 z-10">
@@ -90,9 +92,11 @@ export default function CategoryCarousel({
           </div>
 
           {/* Category Image */}
-          <img
+          <Image
             src={currentCategory.carouselImage || "/monitor-big.png"}
             alt={currentCategory.name}
+            width={583}
+            height={473}
             className="w-[300px] h-[243px] md:w-[400px] md:h-[324px] lg:w-[582.61px] lg:h-[472.68px]"
             style={{ transform: "rotate(-2.55deg)" }}
           />
@@ -102,9 +106,11 @@ export default function CategoryCarousel({
             onClick={handleNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-l-md flex items-center justify-center transition-all z-10"
           >
-            <img
+            <Image
               src="/shape-left.svg"
               alt="Next"
+              width={8}
+              height={16}
               className="w-2 h-4 rotate-180"
             />
           </button>

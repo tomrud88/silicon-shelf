@@ -19,6 +19,20 @@ export interface CartItem {
   category: string;
 }
 
+interface CartItemResponse {
+  id: string;
+  quantity: number;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+    category: {
+      name: string;
+    };
+  };
+}
+
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: Omit<CartItem, "quantity">) => void;
@@ -47,7 +61,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.log("Cart data from API:", data);
         // Transform API response to CartItem format
         const items =
-          data.items?.map((item: any) => ({
+          data.items?.map((item: CartItemResponse) => ({
             id: item.id,
             productId: item.product.id,
             name: item.product.name,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import Link from "next/link";
 
@@ -14,33 +14,28 @@ interface BreadcrumbItem {
 }
 
 export default function BreadcrumbNav({ productName }: BreadcrumbNavProps) {
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
+  const breadcrumbs = useMemo(() => {
+    if (typeof window === "undefined") return [];
 
-  useEffect(() => {
-    // Get navigation history from sessionStorage
     const historyJson = sessionStorage.getItem("navigationHistory");
     const history: BreadcrumbItem[] = historyJson
       ? JSON.parse(historyJson)
       : [];
 
-    // Build breadcrumb trail from history
     const trail: BreadcrumbItem[] = [];
 
-    // Add items from history
     history.forEach((item) => {
-      // Avoid duplicates of the same page in a row
       if (trail.length === 0 || trail[trail.length - 1].href !== item.href) {
         trail.push(item);
       }
     });
 
-    // Add current product page
     trail.push({
       label: productName,
-      href: "", // Current page, no link
+      href: "",
     });
 
-    setBreadcrumbs(trail);
+    return trail;
   }, [productName]);
 
   if (breadcrumbs.length === 0) {

@@ -45,6 +45,7 @@ export default function AddToCartSection({
   const handleAddToCart = async () => {
     await addToCart({
       id: productId,
+      productId: productId,
       name: productName,
       price,
       imageUrl: productImage,

@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import DownArrowIcon from "./icons/DownArrowIcon";
+import PlusIcon from "./icons/PlusIcon";
+import Button from "./Button";
 
 interface Category {
   id: string;
@@ -101,29 +103,14 @@ export default function CategoryFilter({
 
           {/* Load More Button */}
           {!showAllCategories && categories.length > 4 && (
-            <button
+            <Button
               onClick={() => setShowAllCategories(true)}
-              className="w-[120px] h-[26px] rounded-[6px] flex items-center justify-center gap-[14px] opacity-100 text-[#FCFCFC] hover:opacity-80 transition-opacity"
+              variant="text"
+              rightIcon={<PlusIcon size={16} />}
+              className="w-[120px] h-[26px] !justify-start !px-0"
             >
-              <span className="font-['Inter'] font-medium text-base leading-[26px]">
-                Load More
-              </span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10 4.16667V15.8333M4.16667 10H15.8333"
-                  stroke="#FCFCFC"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+              Load More
+            </Button>
           )}
         </div>
       )}
