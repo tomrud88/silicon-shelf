@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ShieldCrossIcon from "@/components/icons/ShieldCrossIcon";
 import AddToCartSection from "@/components/AddToCartSection";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
@@ -41,10 +42,14 @@ export default async function ProductDetailPage({
   const { id } = await params;
   const product = await getProduct(id);
 
-  // Generate random delivery date range (3-4 days) within next 7 days
+  // Generate deterministic delivery date range based on product ID
   const today = new Date();
-  const startDaysOffset = Math.floor(Math.random() * 4); // 0-3 days from now
-  const deliveryDuration = Math.floor(Math.random() * 2) + 3; // 3-4 days duration
+  // Use product ID hash for consistent but varied delivery estimates
+  const idHash = id
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const startDaysOffset = idHash % 4; // 0-3 days from now
+  const deliveryDuration = (idHash % 2) + 3; // 3-4 days duration
 
   const startDate = new Date(today);
   startDate.setDate(today.getDate() + startDaysOffset);
@@ -73,9 +78,11 @@ export default async function ProductDetailPage({
             <div className="w-[422px] max-w-full h-[472px] flex flex-col gap-8 opacity-100">
               {/* Main Image */}
               <div className="w-[422px] h-[341px] rounded-[6px] flex gap-[10px] opacity-100 p-3 border border-[#383B42] bg-[#262626]">
-                <img
+                <Image
                   src={product.imageUrl}
                   alt={product.name}
+                  width={398}
+                  height={317}
                   className="w-full h-full object-cover rounded-[6px]"
                 />
               </div>
@@ -84,27 +91,33 @@ export default async function ProductDetailPage({
               <div className="w-[422px] h-[99px] flex gap-4 opacity-100">
                 {/* Thumbnail 1 - Active */}
                 <div className="w-[130px] h-[99px] rounded-[6px] opacity-100 border-2 border-[#F29145] overflow-hidden">
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={130}
+                    height={99}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* Thumbnail 2 */}
                 <div className="w-[130px] h-[99px] rounded-[6px] opacity-100 border-2 border-transparent overflow-hidden hover:border-[#F29145] cursor-pointer transition-colors">
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={130}
+                    height={99}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
                 {/* Thumbnail 3 */}
                 <div className="w-[130px] h-[99px] rounded-[6px] opacity-100 border-2 border-transparent overflow-hidden hover:border-[#F29145] cursor-pointer transition-colors">
-                  <img
+                  <Image
                     src={product.imageUrl}
                     alt={product.name}
+                    width={130}
+                    height={99}
                     className="w-full h-full object-cover"
                   />
                 </div>

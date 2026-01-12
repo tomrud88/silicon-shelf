@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import DownArrowIcon from "./icons/DownArrowIcon";
+import Button from "./Button";
 
 interface PriceFilterProps {
   minPrice?: string;
@@ -15,11 +16,6 @@ export default function PriceFilter({ minPrice, maxPrice }: PriceFilterProps) {
   const [maxValue, setMaxValue] = useState(maxPrice || "");
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    setMinValue(minPrice || "");
-    setMaxValue(maxPrice || "");
-  }, [minPrice, maxPrice]);
 
   const handleApplyFilter = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -52,14 +48,14 @@ export default function PriceFilter({ minPrice, maxPrice }: PriceFilterProps) {
         <h3 className="font-['Inter'] font-semibold text-[20px] leading-[30px] tracking-[-0.01em] text-[#FCFCFC]">
           Price
         </h3>
-        <button
+        <Button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-6 h-6 opacity-100 relative cursor-pointer hover:opacity-80 transition-opacity"
+          className="!w-6 !h-6 !p-0 !bg-transparent hover:!opacity-80 hover:!bg-transparent !min-w-0 !rounded-none relative"
         >
           <div className="absolute top-[9px] left-1">
             <DownArrowIcon size={16} />
           </div>
-        </button>
+        </Button>
       </div>
 
       {isExpanded && (

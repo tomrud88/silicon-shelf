@@ -61,12 +61,12 @@ export default function CategoryCarousel({
         {/* Ad Banner */}
         <div className="w-full max-w-[1360px] min-h-[400px] lg:h-[452px] rounded-md border border-[#383B42] py-10 lg:py-20 px-8 lg:px-[120px] flex flex-col lg:flex-row gap-8 lg:gap-2.5 items-center justify-between overflow-hidden relative">
           {/* Left Arrow */}
-          <button
+          <Button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-r-md flex items-center justify-center transition-all z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-r-md text-[#262626] rounded-l-none"
           >
             <ShapeLeftIcon size={16} className="text-[#262626]" />
-          </button>
+          </Button>
 
           <div className="w-full max-w-[433px] flex flex-col gap-6 lg:gap-10 z-10">
             <div className="flex flex-col gap-4 lg:gap-6">
@@ -105,12 +105,12 @@ export default function CategoryCarousel({
           )}
 
           {/* Right Arrow */}
-          <button
+          <Button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-l-md flex items-center justify-center transition-all z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-11 h-[74px] py-1 px-[7px] bg-[#F29145] hover:bg-[#E08034] rounded-l-md text-[#262626] rounded-r-none"
           >
             <ShapeLeftIcon size={16} className="text-[#262626] rotate-180" />
-          </button>
+          </Button>
         </div>
       </div>
 

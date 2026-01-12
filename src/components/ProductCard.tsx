@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { useNotification } from "@/contexts/NotificationContext";
@@ -88,9 +89,11 @@ export default function ProductCard({
     >
       {/* Product Image */}
       <div className="w-[268px] h-[204px] relative flex gap-[10px] opacity-100">
-        <img
+        <Image
           src={imageUrl}
           alt={productName}
+          width={268}
+          height={204}
           className="w-[268px] h-[204px] rounded-[6px] opacity-100 object-cover"
         />
         {/* Cart Icon */}

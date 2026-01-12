@@ -2,6 +2,7 @@
 
 import CheckCircleIcon from "@/components/icons/CheckCircleIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
+import Button from "@/components/Button";
 
 interface NotificationProps {
   message: string;
@@ -21,13 +22,12 @@ export default function Notification({ message, onClose }: NotificationProps) {
         </p>
 
         {/* Close Button */}
-        <button
+        <Button
           onClick={onClose}
-          className="flex items-center justify-center w-6 h-6 hover:opacity-70 transition-opacity text-[#FCFCFC]"
-          aria-label="Close notification"
+          className="!w-6 !h-6 !p-0 !bg-transparent hover:!opacity-70 hover:!bg-transparent !text-[#FCFCFC] !min-w-0 !rounded-none"
         >
           <CloseIcon size={19} />
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import TrashIcon from "@/components/icons/TrashIcon";
 import MinusIcon from "@/components/icons/MinusIcon";
 import PlusIcon from "@/components/icons/PlusIcon";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
+import Button from "@/components/Button";
 import { useCart } from "@/contexts/CartContext";
 
 export default function CartPage() {
@@ -192,11 +193,13 @@ export default function CartPage() {
 
                 {/* Checkout Button */}
                 <Link href="/checkout">
-                  <button className="w-[375px] max-[430px]:w-[296px] h-[54px] rounded-[6px] gap-[14px] opacity-100 py-[14px] px-5 bg-[#F29145] hover:bg-[#E17F33] transition-colors">
-                    <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-center align-middle text-[#262626]">
-                      Checkout
-                    </span>
-                  </button>
+                  <Button
+                    variant="fill"
+                    size="l"
+                    className="w-[375px] max-[430px]:w-[296px] h-[54px]"
+                  >
+                    Checkout
+                  </Button>
                 </Link>
               </div>
             </div>

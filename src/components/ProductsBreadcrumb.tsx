@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -11,11 +11,10 @@ interface BreadcrumbItem {
 }
 
 export default function ProductsBreadcrumb() {
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([]);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
+  const breadcrumbs = useMemo(() => {
     // Get navigation history from sessionStorage
     const historyJson = sessionStorage.getItem("navigationHistory");
     const history: BreadcrumbItem[] = historyJson
@@ -41,7 +40,7 @@ export default function ProductsBreadcrumb() {
       href: "", // Current page, no link
     });
 
-    setBreadcrumbs(trail);
+    return trail;
   }, [pathname, searchParams]);
 
   if (breadcrumbs.length === 0) {

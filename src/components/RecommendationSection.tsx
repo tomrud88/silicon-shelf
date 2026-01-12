@@ -5,8 +5,18 @@ import ProductCard from "./ProductCard";
 import ArrowRightIcon from "./icons/ArrowRightIcon";
 import Button from "./Button";
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+  category: {
+    name: string;
+  };
+}
+
 interface RecommendationSectionProps {
-  recommendations: any[];
+  recommendations: Product[];
 }
 
 export default function RecommendationSection({
@@ -64,7 +74,7 @@ export default function RecommendationSection({
         ref={scrollContainerRef}
         className="w-screen -ml-10 pl-10 pr-10 h-[386px] scrollbar-hide relative z-10 overflow-x-auto overflow-y-hidden flex gap-8"
       >
-        {recommendations.map((product: any) => (
+        {recommendations.map((product: Product) => (
           <div key={product.id} className="flex-shrink-0">
             <ProductCard
               id={product.id}
