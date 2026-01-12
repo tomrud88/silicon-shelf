@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import TrashIcon from "@/components/icons/TrashIcon";
+import MinusIcon from "@/components/icons/MinusIcon";
+import PlusIcon from "@/components/icons/PlusIcon";
 import BreadcrumbNav from "@/components/BreadcrumbNav";
 import { useCart } from "@/contexts/CartContext";
 
@@ -121,12 +123,7 @@ export default function CartPage() {
                                   disabled={item.quantity <= 1}
                                   className="disabled:opacity-50"
                                 >
-                                  <Image
-                                    src="/minus.svg"
-                                    alt="Decrease"
-                                    width={16}
-                                    height={16}
-                                  />
+                                  <MinusIcon size={16} />
                                 </button>
                                 <span className="font-['Inter'] font-medium text-[14px] text-[#FCFCFC]">
                                   {item.quantity}
@@ -136,12 +133,7 @@ export default function CartPage() {
                                     updateQuantity(item.id, item.quantity + 1)
                                   }
                                 >
-                                  <Image
-                                    src="/plus.svg"
-                                    alt="Increase"
-                                    width={16}
-                                    height={16}
-                                  />
+                                  <PlusIcon size={16} />
                                 </button>
                               </div>
                             </div>

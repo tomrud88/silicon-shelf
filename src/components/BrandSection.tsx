@@ -35,12 +35,12 @@ export default function BrandSection() {
   };
 
   const brands = [
-    { name: "Corsair", logo: "/Corsair-logo.png" },
-    { name: "Sony", logo: "/sony-logo.png" },
-    { name: "Logitech", logo: "/Logitech Logo.png" },
-    { name: "Razer", logo: "/Razer Logo.png" },
-    { name: "Samsung", logo: "/samsung-logo.png" },
-    { name: "Dell", logo: "/dell-logo.png" },
+    { name: "Corsair", logo: "https://i.ibb.co/FSgWf01/Corsair-logo.png" },
+    { name: "Sony", logo: "https://i.ibb.co/PzGDXQrh/sony-logo.png" },
+    { name: "Logitech", logo: "https://i.ibb.co/b50JhqxK/Logitech-Logo.png" },
+    { name: "Razer", logo: "https://i.ibb.co/jkTtnrtf/Razer-Logo.png" },
+    { name: "Samsung", logo: "https://i.ibb.co/DDPxgHVH/samsung-logo.png" },
+    { name: "Dell", logo: "https://i.ibb.co/7dFXphNX/dell-logo.png" },
   ];
 
   return (

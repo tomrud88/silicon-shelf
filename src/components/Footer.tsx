@@ -1,3 +1,9 @@
+import VisaIcon from "./icons/VisaIcon";
+import MastercardIcon from "./icons/MastercardIcon";
+import PaypalIcon from "./icons/PaypalIcon";
+import ApplePayIcon from "./icons/ApplePayIcon";
+import GooglePayIcon from "./icons/GooglePayIcon";
+
 export default function Footer() {
   return (
     <footer className="w-full bg-[#222327]">
@@ -18,31 +24,11 @@ export default function Footer() {
 
           {/* Payment icons */}
           <div className="w-full sm:w-[282px] flex flex-wrap items-center justify-start gap-1 sm:-space-x-1">
-            <img
-              src="/Visa.svg"
-              alt="Visa"
-              className="h-[32px] sm:h-[40px] sm:-ml-2"
-            />
-            <img
-              src="/mastercard.svg"
-              alt="Mastercard"
-              className="h-[32px] sm:h-[40px]"
-            />
-            <img
-              src="/paypal.svg"
-              alt="PayPal"
-              className="h-[32px] sm:h-[40px]"
-            />
-            <img
-              src="/apple.svg"
-              alt="Apple Pay"
-              className="h-[32px] sm:h-[40px]"
-            />
-            <img
-              src="/gpay.svg"
-              alt="Google Pay"
-              className="h-[32px] sm:h-[40px]"
-            />
+            <VisaIcon className="h-[32px] sm:h-[40px] sm:-ml-2" />
+            <MastercardIcon className="h-[32px] sm:h-[40px]" />
+            <PaypalIcon className="h-[32px] sm:h-[40px]" />
+            <ApplePayIcon className="h-[32px] sm:h-[40px]" />
+            <GooglePayIcon className="h-[32px] sm:h-[40px]" />
           </div>
         </div>
 

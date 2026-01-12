@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
 import { useNotification } from "@/contexts/NotificationContext";
+import CartIcon from "@/components/icons/CartIcon";
 
 interface ProductCardProps {
   id?: string;
@@ -68,7 +69,8 @@ export default function ProductCard({
     if (!id) return;
 
     await addToCart({
-      id,
+      id: id,
+      productId: id,
       name: productName,
       price,
       imageUrl,
@@ -96,7 +98,7 @@ export default function ProductCard({
           onClick={handleAddToCart}
           className="absolute top-3 left-3 w-8 h-8 rounded-[6px] bg-[#262626] flex items-center justify-center gap-[10px] p-1 opacity-100 hover:bg-[#F29145] transition-colors z-10"
         >
-          <img src="/cart-4.svg" alt="Add to cart" className="w-6 h-6 invert" />
+          <CartIcon className="w-6 h-6" />
         </button>
       </div>
       {/* Product Details */}
