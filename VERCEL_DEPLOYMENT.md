@@ -141,24 +141,24 @@ Update `package.json`:
 Create `scripts/seed-production.ts`:
 
 ```typescript
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
   // Your seed logic here
-  console.log('Seeding production database...')
+  console.log("Seeding production database...");
   // Import and run your seed function
 }
 
 main()
   .catch((e) => {
-    console.error(e)
-    process.exit(1)
+    console.error(e);
+    process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect()
-  })
+    await prisma.$disconnect();
+  });
 ```
 
 Run once after deployment:
@@ -178,6 +178,7 @@ vercel --prod
 ```
 
 Vercel will:
+
 1. Install dependencies
 2. Generate Prisma Client
 3. Run migrations (if configured)
