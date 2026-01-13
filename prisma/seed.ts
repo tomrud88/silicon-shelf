@@ -392,7 +392,7 @@ async function main() {
       city: "New York",
       postalCode: "10001",
       country: "USA",
-      phone: "+1234567890",
+      mobileNumber: "+1234567890",
     },
   });
 
