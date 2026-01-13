@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     console.log("Order request body:", body);
-    
+
     const {
       items,
       shippingAddress,
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
           productId: item.productId,
           quantity: item.quantity,
           priceAtPurchase: item.price,
-        }))
+        })),
       });
 
       // Stwórz zamówienie
@@ -142,16 +142,24 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error("Error creating order - Full error:", error);
-    console.error("Error message:", error instanceof Error ? error.message : "Unknown error");
-    console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace");
-    
+    console.error(
+      "Error message:",
+      error instanceof Error ? error.message : "Unknown error"
+    );
+    console.error(
+      "Error stack:",
+      error instanceof Error ? error.stack : "No stack trace"
+    );
+
     // Return more detailed error information in development
-    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-    
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+
     return NextResponse.json(
-      { 
+      {
         error: "Failed to create order",
-        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+        details:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       },
       { status: 500 }
     );

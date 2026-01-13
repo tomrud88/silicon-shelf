@@ -46,18 +46,18 @@ export default function ProfileClientComponent({
       <BreadcrumbNav productName="Profile" />
 
       {/* Main Content Container - 1440px width */}
-      <div className="max-w-[1440px] w-full min-h-[424px] gap-12 opacity-100 p-10 mx-auto flex items-start">
+      <div className="max-w-[1440px] w-full min-h-[424px] gap-8 min-[1400px]:gap-12 opacity-100 px-6 py-8 min-[1400px]:p-10 mx-auto flex flex-col min-[900px]:flex-row items-stretch min-[900px]:items-start">
         {/* Sidebar Container - Left side */}
-        <div className="w-[320px] min-h-[194px] rounded-[6px] gap-6 opacity-100 border p-6 bg-[#262626] border-[#383B42] flex flex-col">
+        <div className="w-full min-[900px]:w-[320px] min-h-[194px] rounded-[6px] gap-6 opacity-100 border p-6 bg-[#262626] border-[#383B42] flex flex-col min-[900px]:flex-shrink-0">
           {/* Account Container */}
-          <div className="w-[272px] h-[72px] gap-6 opacity-100 flex items-center">
+          <div className="w-full h-[72px] gap-6 opacity-100 flex items-center">
             {/* Profile Image - Left */}
             <div className="w-[72px] h-[72px] opacity-100 flex-shrink-0">
               <ProfileIcon size={72} />
             </div>
 
             {/* Text Container - Right */}
-            <div className="w-[176px] h-[72px] opacity-100 flex flex-col justify-center">
+            <div className="flex-1 h-[72px] opacity-100 flex flex-col justify-center">
               {/* Name */}
               <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] align-middle text-[var(--text-primary)]">
                 {user?.name || "User"}
@@ -71,7 +71,7 @@ export default function ProfileClientComponent({
           </div>
 
           {/* Divider */}
-          <div className="w-[272px] h-0 opacity-100 border-t border-[#383B42]"></div>
+          <div className="w-full h-0 opacity-100 border-t border-[#383B42]"></div>
 
           {/* Logout Text */}
           <button
@@ -83,23 +83,23 @@ export default function ProfileClientComponent({
         </div>
 
         {/* Content Container - Right side (Order History) */}
-        <div className="w-[992px] min-h-[344px] gap-8 opacity-100 flex flex-col">
+        <div className="w-full min-[900px]:flex-1 min-h-[344px] gap-8 opacity-100 flex flex-col">
           {/* Link Container */}
-          <div className="w-[470px] h-10 opacity-100">
+          <div className="w-full min-[900px]:max-w-[470px] h-10 opacity-100">
             {/* Transaction Container */}
-            <div className="w-[470px] h-10 gap-3 opacity-100 flex flex-col items-center">
+            <div className="w-full min-[900px]:max-w-[470px] h-10 gap-3 opacity-100 flex flex-col items-center">
               {/* Text */}
               <span className="font-['Inter'] font-semibold text-[18px] leading-[28px] tracking-[0%] text-[#F29145]">
                 Transaction
               </span>
 
               {/* Divider */}
-              <div className="w-[470px] h-0 opacity-100 border-t-2 border-[#F29145]"></div>
+              <div className="w-full h-0 opacity-100 border-t-2 border-[#F29145]"></div>
             </div>
           </div>
 
           {/* Notification List Container */}
-          <div className="w-[992px] min-h-[272px] gap-4 opacity-100 flex flex-col">
+          <div className="w-full min-h-[272px] gap-4 opacity-100 flex flex-col">
             {orders.length === 0 ? (
               <div className="text-[var(--text-secondary)]">
                 No orders found
@@ -108,7 +108,7 @@ export default function ProfileClientComponent({
               orders.map((order) => (
                 <div
                   key={order.id}
-                  className="w-[992px] h-[128px] rounded-[6px] gap-4 opacity-100 border p-4 bg-[#262626] border-[#383B42] flex items-start cursor-pointer hover:bg-[#2a2a2a] transition-colors"
+                  className="w-full rounded-[6px] gap-4 opacity-100 border p-4 bg-[#262626] border-[#383B42] flex flex-col sm:flex-row sm:items-start cursor-pointer hover:bg-[#2a2a2a] transition-colors"
                   onClick={() => router.push(`/order-confirmation/${order.id}`)}
                 >
                   {/* Icon Container */}
@@ -117,9 +117,9 @@ export default function ProfileClientComponent({
                   </div>
 
                   {/* Data and Info Container */}
-                  <div className="w-[918px] h-[96px] gap-[14px] opacity-100 flex flex-col">
+                  <div className="w-full gap-[14px] opacity-100 flex flex-col">
                     {/* Data Component */}
-                    <div className="w-[918px] h-[26px] gap-4 opacity-100">
+                    <div className="w-full gap-4 opacity-100">
                       <span className="font-['Inter'] font-normal text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                         {new Date(order.createdAt).toLocaleDateString("en-US", {
                           year: "numeric",
@@ -130,7 +130,7 @@ export default function ProfileClientComponent({
                     </div>
 
                     {/* Info Container */}
-                    <div className="w-[918px] h-[56px] gap-1 opacity-100 flex flex-col">
+                    <div className="w-full gap-1 opacity-100 flex flex-col">
                       <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
                         Your order nr {order.id}
                       </span>
