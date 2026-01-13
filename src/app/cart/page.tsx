@@ -122,7 +122,7 @@ export default function CartPage() {
                                     updateQuantity(item.id, item.quantity - 1)
                                   }
                                   disabled={item.quantity <= 1}
-                                  className={`transition-opacity ${
+                                  className={`p-2 -m-2 transition-opacity ${
                                     item.quantity <= 1
                                       ? "opacity-50 cursor-not-allowed"
                                       : "hover:opacity-70"
@@ -137,7 +137,7 @@ export default function CartPage() {
                                   onClick={() =>
                                     updateQuantity(item.id, item.quantity + 1)
                                   }
-                                  className="hover:opacity-70 transition-opacity"
+                                  className="p-2 -m-2 hover:opacity-70 transition-opacity"
                                 >
                                   <PlusIcon size={16} />
                                 </button>
