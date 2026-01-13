@@ -101,7 +101,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
       });
 
       if (response.ok) {
-        await fetchCart(); // Refresh cart from server
+        // Optimistically update cart count without full refetch
+        setCartItems(prev => {
+          const existing = prev.find(item => item.productId === product.id);
+          if (existing) {
+            return prev.map(item =>
+              item.productId === product.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            );
+          }
+          return [...prev, { ...product, quantity: 1 }];
+        });
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
