@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 import ProfileIcon from "@/components/icons/ProfileIcon";
 import BagIcon from "@/components/icons/BagIcon";
 
@@ -27,32 +26,14 @@ interface Order {
 
 interface ProfileClientComponentProps {
   user: User;
+  orders: Order[];
 }
 
 export default function ProfileClientComponent({
   user,
+  orders = [],
 }: ProfileClientComponentProps) {
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const ordersResponse = await fetch("/api/orders");
-        if (ordersResponse.ok) {
-          const ordersData = await ordersResponse.json();
-          setOrders(ordersData);
-        }
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchOrders();
-  }, []);
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -119,11 +100,7 @@ export default function ProfileClientComponent({
 
           {/* Notification List Container */}
           <div className="w-[992px] min-h-[272px] gap-4 opacity-100 flex flex-col">
-            {isLoading ? (
-              <div className="text-[var(--text-secondary)]">
-                Loading orders...
-              </div>
-            ) : orders.length === 0 ? (
+            {orders.length === 0 ? (
               <div className="text-[var(--text-secondary)]">
                 No orders found
               </div>

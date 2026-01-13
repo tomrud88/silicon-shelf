@@ -2,7 +2,7 @@
 
 import CheckCircleIcon from "@/components/icons/CheckCircleIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 
 interface NotificationProps {
   message: string;
@@ -11,7 +11,7 @@ interface NotificationProps {
 
 export default function Notification({ message, onClose }: NotificationProps) {
   return (
-    <div className="w-full flex justify-center px-4 py-4">
+    <div className="fixed top-0 left-0 right-0 w-full flex justify-center px-4 py-4 z-50">
       <div className="w-full max-w-[1360px] h-[66px] flex items-center gap-[16px] rounded-[6px] border border-[#22C55E] bg-[#295B40] px-[18px]">
         {/* Check Circle Icon */}
         <CheckCircleIcon size={24} />

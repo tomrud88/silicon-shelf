@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import { SessionProvider } from "next-auth/react";
-import AuthGuard from "@/components/AuthGuard";
-import { NotificationProvider } from "@/contexts/NotificationContext";
-import NotificationDisplay from "@/components/NotificationDisplay";
+import AuthGuard from "@/components/features/AuthGuard";
 import { CartProvider } from "@/contexts/CartContext";
 
 const inter = Inter({
@@ -32,14 +30,11 @@ export default function RootLayout({
       >
         <SessionProvider>
           <CartProvider>
-            <NotificationProvider>
-              <AuthGuard>
-                <Header />
-                <NotificationDisplay />
-                {children}
-                <Footer />
-              </AuthGuard>
-            </NotificationProvider>
+            <AuthGuard>
+              <Header />
+              {children}
+              <Footer />
+            </AuthGuard>
           </CartProvider>
         </SessionProvider>
       </body>

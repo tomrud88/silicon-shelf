@@ -1,8 +1,8 @@
-import VisaIcon from "./icons/VisaIcon";
-import MastercardIcon from "./icons/MastercardIcon";
-import PaypalIcon from "./icons/PaypalIcon";
-import ApplePayIcon from "./icons/ApplePayIcon";
-import GooglePayIcon from "./icons/GooglePayIcon";
+import VisaIcon from "@/components/icons/VisaIcon";
+import MastercardIcon from "@/components/icons/MastercardIcon";
+import PaypalIcon from "@/components/icons/PaypalIcon";
+import ApplePayIcon from "@/components/icons/ApplePayIcon";
+import GooglePayIcon from "@/components/icons/GooglePayIcon";
 
 export default function Footer() {
   return (

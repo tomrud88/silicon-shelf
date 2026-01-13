@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import IconCard from "./IconCard";
-import ArrowRightIcon from "./icons/ArrowRightIcon";
-import Button from "./Button";
+import IconCard from "@/components/features/IconCard";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import Button from "@/components/ui/Button";
 import Image from "next/image";
 
 export default function BrandSection() {

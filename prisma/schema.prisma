@@ -109,6 +109,7 @@ model Order {
   userId      String
   status      OrderStatus @default(PENDING)
   totalAmount Float
+  productProtection Boolean @default(false)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   

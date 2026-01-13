@@ -1,8 +1,8 @@
 import Image from "next/image";
 import ShieldCrossIcon from "@/components/icons/ShieldCrossIcon";
-import AddToCartSection from "@/components/AddToCartSection";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
-import ProductDescription from "@/components/ProductDescription";
+import AddToCartSection from "@/components/features/AddToCartSection";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
+import ProductDescription from "@/components/features/ProductDescription";
 
 interface ProductDetailPageProps {
   params: Promise<{

@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import ProductCard from "./ProductCard";
-import ArrowRightIcon from "./icons/ArrowRightIcon";
-import Button from "./Button";
+import ProductCard from "@/components/features/ProductCard";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import Button from "@/components/ui/Button";
 
 interface Product {
   id: string;

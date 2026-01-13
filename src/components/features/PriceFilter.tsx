@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import DownArrowIcon from "./icons/DownArrowIcon";
-import Button from "./Button";
+import DownArrowIcon from "@/components/icons/DownArrowIcon";
+import Button from "@/components/ui/Button";
 
 interface PriceFilterProps {
   minPrice?: string;

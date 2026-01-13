@@ -2,32 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import DownArrowIcon from "./icons/DownArrowIcon";
+import DownArrowIcon from "../icons/DownArrowIcon";
 
-interface SortOption {
+interface ShowOption {
   value: string;
   label: string;
 }
 
-const sortOptions: SortOption[] = [
-  { value: "newest", label: "Latest" },
-  { value: "cheapest", label: "Cheapest" },
-  { value: "expensive", label: "Expensive" },
+const showOptions: ShowOption[] = [
+  { value: "9", label: "9" },
+  { value: "12", label: "12" },
+  { value: "15", label: "15" },
 ];
 
-interface SortDropdownProps {
-  selectedSort?: string;
+interface ShowDropdownProps {
+  selectedLimit?: string;
 }
 
-export default function SortDropdown({ selectedSort }: SortDropdownProps) {
+export default function ShowDropdown({ selectedLimit }: ShowDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const currentSort = selectedSort || "newest";
+  const currentLimit = selectedLimit || "9";
   const currentLabel =
-    sortOptions.find((opt) => opt.value === currentSort)?.label || "Latest";
+    showOptions.find((opt) => opt.value === currentLimit)?.label || "9";
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,20 +43,22 @@ export default function SortDropdown({ selectedSort }: SortDropdownProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSortChange = (sortValue: string) => {
+  const handleLimitChange = (limitValue: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", sortValue);
+    params.set("limit", limitValue);
+    // Reset to page 1 when changing limit
+    params.set("page", "1");
     router.push(`/products?${params.toString()}`);
     setIsOpen(false);
   };
 
   return (
     <div
-      className="w-[211px] h-11 flex items-center gap-4 opacity-100"
+      className="w-[172px] h-11 flex items-center gap-4 opacity-100"
       ref={dropdownRef}
     >
       <span className="font-['Inter'] font-semibold text-[20px] leading-[30px] tracking-[-0.01em] text-[#FCFCFC]">
-        Sort by
+        Show
       </span>
 
       {/* Dropdown */}
@@ -75,12 +77,12 @@ export default function SortDropdown({ selectedSort }: SortDropdownProps) {
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-full mt-2 w-[158px] bg-[#262626] border border-[#616674] rounded-[6px] shadow-lg z-50">
-            {sortOptions.map((option) => (
+          <div className="absolute top-full mt-2 w-[126px] bg-[#262626] border border-[#616674] rounded-[6px] shadow-lg z-50">
+            {showOptions.map((option) => (
               <button
                 key={option.value}
                 className="w-full px-4 py-3 text-left font-['Inter'] font-normal text-sm leading-6 text-[#FCFCFC] hover:bg-[#383B42] transition-colors first:rounded-t-[6px] last:rounded-b-[6px]"
-                onClick={() => handleSortChange(option.value)}
+                onClick={() => handleLimitChange(option.value)}
               >
                 {option.label}
               </button>

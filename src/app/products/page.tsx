@@ -1,12 +1,12 @@
-import CategoryFilter from "@/components/CategoryFilter";
+import CategoryFilter from "@/components/features/CategoryFilter";
 import DownArrowIcon from "@/components/icons/DownArrowIcon";
-import Button from "@/components/Button";
-import ProductCard from "@/components/ProductCard";
-import SortDropdown from "@/components/SortDropdown";
-import PriceFilter from "@/components/PriceFilter";
-import ShowDropdown from "@/components/ShowDropdown";
-import Pagination from "@/components/Pagination";
-import ProductsBreadcrumb from "@/components/ProductsBreadcrumb";
+import Button from "@/components/ui/Button";
+import ProductCard from "@/components/features/ProductCard";
+import SortDropdown from "@/components/ui/SortDropdown";
+import PriceFilter from "@/components/features/PriceFilter";
+import ShowDropdown from "@/components/ui/ShowDropdown";
+import Pagination from "@/components/ui/Pagination";
+import ProductsBreadcrumb from "@/components/layout/ProductsBreadcrumb";
 
 interface Product {
   id: string;

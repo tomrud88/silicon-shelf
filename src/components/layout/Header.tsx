@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import CartIcon from "./icons/CartIcon";
-import ProfileIcon from "./icons/ProfileIcon";
-import Button from "./Button";
+import CartIcon from "@/components/icons/CartIcon";
+import ProfileIcon from "@/components/icons/ProfileIcon";
+import Button from "@/components/ui/Button";
 
 export default function Header() {
   const pathname = usePathname();

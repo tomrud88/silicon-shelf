@@ -1,6 +1,6 @@
 "use client";
 
-import RegisterForm from "@/components/RegisterForm";
+import RegisterForm from "@/components/features/RegisterForm";
 import { useState } from "react";
 import CheckCircleIcon from "@/components/icons/CheckCircleIcon";
 import Link from "next/link";
@@ -26,14 +26,14 @@ export default function RegisterPage() {
                     Thank you!
                   </h1>
                   <p className="font-medium text-[24px] leading-[36px] tracking-[-0.01em] text-center text-[#FCFCFC]">
-                    You have succesfully register
+                    You have successfully register
                   </p>
                 </div>
 
                 {/* Description Container */}
                 <div className="w-full max-w-[1440px] flex flex-col items-center gap-[19px]">
                   <p className="font-normal text-[18px] leading-[28px] tracking-[0%] text-center text-[#E7E7E7]">
-                    Please check your e-mail for further information. Let's
+                    Please check your e-mail for further information. Let&apos;s
                     exploring our products and enjoy many gifts.
                   </p>
 

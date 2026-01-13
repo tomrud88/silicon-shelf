@@ -57,7 +57,7 @@ export async function GET(
       shippingAddress: "Main Address", // Możesz dodać pole w bazie danych
       paymentMethod: "Apple Pay", // Możesz dodać pole w bazie danych
       shippingMethod: "NexusHub Courier", // Możesz dodać pole w bazie danych
-      productProtection: false, // Możesz dodać pole w bazie danych
+      productProtection: order.productProtection,
       createdAt: order.createdAt,
       items: order.orderItems.map((item) => ({
         id: item.id,

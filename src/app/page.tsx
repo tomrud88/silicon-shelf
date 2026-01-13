@@ -3,10 +3,10 @@ import MonitorIcon from "@/components/icons/MonitorIcon";
 import HeadphoneIcon from "@/components/icons/HeadphoneIcon";
 import KeyboardIcon from "@/components/icons/KeyboardIcon";
 import WebcamIcon from "@/components/icons/WebcamIcon";
-import IconCard from "@/components/IconCard";
-import CategoryCarousel from "@/components/CategoryCarousel";
-import RecommendationSection from "@/components/RecommendationSection";
-import BrandSection from "@/components/BrandSection";
+import IconCard from "@/components/features/IconCard";
+import CategoryCarousel from "@/components/features/CategoryCarousel";
+import RecommendationSection from "@/components/features/RecommendationSection";
+import BrandSection from "@/components/features/BrandSection";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {

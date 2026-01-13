@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 import ShieldCrossIcon from "@/components/icons/ShieldCrossIcon";
 import ApplePayIcon from "@/components/icons/ApplePayIcon";
 import { useCart } from "@/contexts/CartContext";
-import CheckoutProductCard from "@/components/checkout/CheckoutProductCard";
-import AddressSection from "@/components/checkout/AddressSection";
-import OrderSummary from "@/components/checkout/OrderSummary";
+import CheckoutProductCard from "@/components/features/checkout/CheckoutProductCard";
+import AddressSection from "@/components/features/checkout/AddressSection";
+import OrderSummary from "@/components/features/checkout/OrderSummary";
 
 export default function CheckoutPage() {
   const { cartItems, totalItems, totalPrice } = useCart();
@@ -138,6 +138,7 @@ export default function CheckoutPage() {
       };
 
       // Wyślij zamówienie do API
+      console.log("Sending order data:", orderData);
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
@@ -147,8 +148,10 @@ export default function CheckoutPage() {
       });
 
       const data = await response.json();
+      console.log("API response:", response.status, data);
 
       if (!response.ok) {
+        console.error("Order creation failed:", data);
         throw new Error(data.error || "Failed to create order");
       }
 

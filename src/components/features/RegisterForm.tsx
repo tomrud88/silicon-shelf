@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Button";
+import Button from "@/components/ui/Button";
 import ClosedEyeIcon from "@/components/icons/ClosedEyeIcon";
 import DownArrowIcon from "@/components/icons/DownArrowIcon";
 import CheckIcon from "@/components/icons/CheckIcon";
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { countries } from "@/data/countries";
+import { countries } from "@/constants/countries";
 
 type RegisterFormData = {
   email: string;

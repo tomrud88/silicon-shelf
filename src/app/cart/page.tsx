@@ -5,8 +5,8 @@ import Image from "next/image";
 import TrashIcon from "@/components/icons/TrashIcon";
 import MinusIcon from "@/components/icons/MinusIcon";
 import PlusIcon from "@/components/icons/PlusIcon";
-import BreadcrumbNav from "@/components/BreadcrumbNav";
-import Button from "@/components/Button";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
+import Button from "@/components/ui/Button";
 import { useCart } from "@/contexts/CartContext";
 
 export default function CartPage() {

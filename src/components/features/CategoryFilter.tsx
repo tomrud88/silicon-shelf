@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import DownArrowIcon from "./icons/DownArrowIcon";
-import PlusIcon from "./icons/PlusIcon";
-import Button from "./Button";
+import DownArrowIcon from "@/components/icons/DownArrowIcon";
+import PlusIcon from "@/components/icons/PlusIcon";
+import Button from "@/components/ui/Button";
 
 interface Category {
   id: string;
