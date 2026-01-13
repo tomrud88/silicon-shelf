@@ -14,7 +14,8 @@ export async function GET() {
       where: { email: session.user.email },
       select: {
         id: true,
-        name: true,
+        firstName: true,
+        lastName: true,
         email: true,
       },
     });
