@@ -102,10 +102,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       if (response.ok) {
         // Optimistically update cart count without full refetch
-        setCartItems(prev => {
-          const existing = prev.find(item => item.productId === product.id);
+        setCartItems((prev) => {
+          const existing = prev.find((item) => item.productId === product.id);
           if (existing) {
-            return prev.map(item =>
+            return prev.map((item) =>
               item.productId === product.id
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
@@ -121,6 +121,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Remove from cart
   const removeFromCart = async (itemId: string) => {
+    // Optimistic update - remove immediately from UI
+    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+
     try {
       const response = await fetch("/api/cart", {
         method: "PATCH",
@@ -131,16 +134,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }),
       });
 
-      if (response.ok) {
-        await fetchCart(); // Refresh cart from server
+      if (!response.ok) {
+        // Revert on error
+        await fetchCart();
       }
     } catch (error) {
       console.error("Error removing from cart:", error);
+      // Revert on error
+      await fetchCart();
     }
   };
 
   // Update quantity
   const updateQuantity = async (itemId: string, quantity: number) => {
+    console.log("updateQuantity called:", { itemId, quantity });
+
+    // Optimistic update - update immediately in UI
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === itemId ? { ...item, quantity } : item))
+    );
+
     try {
       const response = await fetch("/api/cart", {
         method: "PATCH",
@@ -151,11 +164,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }),
       });
 
-      if (response.ok) {
-        await fetchCart(); // Refresh cart from server
+      console.log("updateQuantity response:", response.status);
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error("updateQuantity failed:", error);
+        // Revert on error
+        await fetchCart();
       }
     } catch (error) {
       console.error("Error updating quantity:", error);
+      // Revert on error
+      await fetchCart();
     }
   };
 
