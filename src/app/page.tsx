@@ -8,6 +8,7 @@ import CategoryCarousel from "@/components/features/CategoryCarousel";
 import RecommendationSection from "@/components/features/RecommendationSection";
 import BrandSection from "@/components/features/BrandSection";
 import { prisma } from "@/lib/prisma";
+import type { ReactElement } from "react";
 
 export default async function Home() {
   const categories = await prisma.category.findMany({
@@ -41,7 +42,7 @@ export default async function Home() {
           <div className="w-full max-w-[1360px] grid grid-cols-1 min-[440px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch opacity-100">
             {categories.slice(0, 5).map((category) => {
               // Map category names to icons
-              const iconMap: { [key: string]: JSX.Element } = {
+              const iconMap: { [key: string]: ReactElement } = {
                 Mouse: <MouseIcon />,
                 Monitor: <MonitorIcon />,
                 Headphone: <HeadphoneIcon />,
