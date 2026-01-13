@@ -105,7 +105,7 @@ export default function CategoryFilter({
           {!showAllCategories && categories.length > 4 && (
             <Button
               onClick={() => setShowAllCategories(true)}
-              variant="text"
+              variant="stroke"
               rightIcon={<PlusIcon size={16} />}
               className="w-[120px] h-[26px] !justify-start !px-0"
             >
