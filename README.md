@@ -13,11 +13,11 @@ Silicon Shelf is an e-commerce storefront for a premium electronics retailer. Th
 ## Tech Stack
 
 - Next.js 16 (App Router, Server/Client Components, Turbopack)
-- TypeScript + ESLint + Prettier
+- TypeScript + ESLint
 - Tailwind CSS for styling
-- Prisma ORM with PostgreSQL via Docker Compose
+- Prisma ORM with PostgreSQL via Docker Compose or Supabase
 - NextAuth for authentication
-- ESLint-powered quality checks with testing tooling to be added
+- ESLint-powered quality checks
 
 ## Project Structure
 
@@ -87,21 +87,16 @@ Key variables include database connection strings, NextAuth secrets, and optiona
 ## Useful Commands
 
 ```bash
-npm run dev            # Start Next.js (without Docker helper)
-npm run dev:full       # Start PostgreSQL via docker-compose then run Next.js
-npm run lint           # Run ESLint
-npm run test           # Execute unit tests
-npm run test:e2e       # Run Playwright end-to-end tests
-npm run prisma:studio  # Open Prisma Studio data browser
+npm run dev                    # Start Next.js development server
+npm run dev:full               # Start PostgreSQL via docker-compose + Next.js
+npm run build                  # Build production bundle
+npm run start                  # Start production server
+npm run lint                   # Run ESLint
+npm run prisma:check-images    # Check category images in database
+npm run prisma:list-products   # List all products from database
+npm run docker:up              # Start PostgreSQL container
+npm run docker:down            # Stop PostgreSQL container
 ```
-
-## Testing
-
-- **Unit tests** – Jest located under `__tests__`
-- **Integration/e2e** – Playwright specs under `e2e`
-- **API coverage** – use `npm run test` (unit) and `npm run test:e2e` (browser automation)
-
-Ensure the database is running and seeded before executing tests that rely on data access.
 
 ## Deployment
 
@@ -122,3 +117,4 @@ For Vercel deployments, connect the repository, configure environment variables 
 ## License
 
 This project is distributed under the MIT License. See `LICENSE` for details.
+passes: `npm run lin
