@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "postinstall": "prisma generate",
+    "prisma:check-images": "tsx prisma/check-images.ts",
+    "prisma:list-products": "tsx prisma/list-products.ts",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "dev:full": "docker-compose up -d && npm run dev"
