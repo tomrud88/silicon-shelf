@@ -14,7 +14,7 @@ export default function Footer() {
           <img
             src="/logo.svg"
             alt="Silicon Shelf"
-            fetchpriority="high"
+            fetchPriority="high"
             className="h-[50px] sm:h-[60px] md:h-[70px] -my-2"
           />
 

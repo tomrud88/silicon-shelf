@@ -69,7 +69,7 @@ export default function RegisterPage() {
             alt="SiliconShelf"
             width="210"
             height="80"
-            fetchpriority="high"
+            fetchPriority="high"
             style={{ width: "210px", height: "80px" }}
           />
           <div className="w-[448px] min-h-[936px] rounded-md border border-[#383B42] bg-[#262626] p-6 flex flex-col gap-[32px]">

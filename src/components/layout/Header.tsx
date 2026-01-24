@@ -27,7 +27,7 @@ export default function Header() {
               alt="SiliconShelf"
               width="210"
               height="80"
-              fetchpriority="high"
+              fetchPriority="high"
               style={{ width: "210px", height: "80px" }}
             />
           </Link>
