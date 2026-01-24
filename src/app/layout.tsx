@@ -30,11 +30,9 @@ export default function RootLayout({
       >
         <SessionProvider>
           <CartProvider>
-            <AuthGuard>
-              <Header />
-              {children}
-              <Footer />
-            </AuthGuard>
+            <Header />
+            <AuthGuard>{children}</AuthGuard>
+            <Footer />
           </CartProvider>
         </SessionProvider>
       </body>
