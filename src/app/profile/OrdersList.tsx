@@ -1,4 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import BagIcon from "@/components/icons/BagIcon";
+import Link from "next/link";
 
 interface OrdersListProps {
   userId: string;
@@ -28,31 +30,30 @@ export default async function OrdersList({ userId }: OrdersListProps) {
 
   if (orders.length === 0) {
     return (
-      <div className="w-full min-h-[200px] rounded-[6px] opacity-100 border p-8 bg-[#262626] border-[#383B42] flex items-center justify-center">
-        <div className="text-center">
-          <p className="font-['Inter'] font-normal text-base leading-[26px] text-[var(--text-secondary)]">
-            No orders yet
-          </p>
-        </div>
+      <div className="text-[var(--text-secondary)]">
+        No orders found
       </div>
     );
   }
 
   return (
-    <div className="w-full gap-6 opacity-100 flex flex-col">
+    <div className="w-full min-h-[272px] gap-4 opacity-100 flex flex-col">
       {orders.map((order) => (
-        <div
+        <Link
           key={order.id}
-          className="w-full min-h-[100px] rounded-[6px] gap-6 opacity-100 border p-6 bg-[#262626] border-[#383B42] flex flex-col"
+          href={`/order-confirmation/${order.id}`}
+          className="w-full rounded-[6px] gap-4 opacity-100 border p-4 bg-[#262626] border-[#383B42] flex flex-col sm:flex-row sm:items-start cursor-pointer hover:bg-[#2a2a2a] transition-colors"
         >
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <span className="font-['Inter'] font-medium text-base leading-[26px] text-[var(--text-primary)]">
-                  Order #{order.id.slice(-8)}
-                </span>
-              </div>
-              <span className="font-['Inter'] font-normal text-sm leading-[24px] text-[var(--text-secondary)]">
+          {/* Icon Container */}
+          <div className="w-[26px] h-[26px] opacity-100 flex-shrink-0">
+            <BagIcon size={26} />
+          </div>
+
+          {/* Data and Info Container */}
+          <div className="w-full gap-[14px] opacity-100 flex flex-col">
+            {/* Data Component */}
+            <div className="w-full gap-4 opacity-100">
+              <span className="font-['Inter'] font-normal text-base leading-[26px] tracking-[0%] text-[var(--text-secondary)]">
                 {new Date(order.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -60,26 +61,20 @@ export default async function OrdersList({ userId }: OrdersListProps) {
                 })}
               </span>
             </div>
-            <div className="flex flex-col items-start sm:items-end gap-1">
-              <span className="font-['Inter'] font-semibold text-lg leading-[28px] text-[#F29145]">
-                ${order.totalAmount.toFixed(2)}
+
+            {/* Info Container */}
+            <div className="w-full gap-1 opacity-100 flex flex-col">
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
+                Your order nr {order.id}
+              </span>
+              <span className="font-['Inter'] font-medium text-[18px] leading-[28px] tracking-[0%] text-[var(--text-primary)]">
+                {order.orderItems[0]?.product.name || "Product"}
+                {order.orderItems.length > 1 &&
+                  ` +${order.orderItems.length - 1} more`}
               </span>
             </div>
           </div>
-
-          <div className="w-full border-t border-[#383B42] pt-4">
-            <div className="flex flex-col gap-2">
-              {order.orderItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="font-['Inter'] font-normal text-sm leading-[24px] text-[var(--text-secondary)]"
-                >
-                  • {item.product.name}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
