@@ -71,6 +71,7 @@ export default function RegisterPage() {
             width={210}
             height={80}
             priority
+            unoptimized
           />
           <div className="w-[448px] min-h-[936px] rounded-md border border-[#383B42] bg-[#262626] p-6 flex flex-col gap-[32px]">
             <div className="w-[400px] flex items-center border-b border-[#383B42] pb-[20px]">

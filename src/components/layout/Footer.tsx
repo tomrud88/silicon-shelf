@@ -18,6 +18,7 @@ export default function Footer() {
             width={210}
             height={70}
             className="h-[50px] sm:h-[60px] md:h-[70px] -my-2"
+            unoptimized
           />
 
           {/* Copyright text */}

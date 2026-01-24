@@ -28,6 +28,7 @@ export default function Header() {
             width={210}
             height={80}
             priority
+            unoptimized
           />
           {isAuthPage ? (
             <Link href="/login">
