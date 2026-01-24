@@ -22,14 +22,16 @@ export default function Header() {
     <header className="w-full bg-[#1A1A1A]">
       <div className="max-w-[1440px] mx-auto px-10 py-8 flex flex-col gap-10">
         <div className="flex justify-between items-center">
-          <Image
-            src="/logo.svg"
-            alt="SiliconShelf"
-            width={210}
-            height={80}
-            priority
-            unoptimized
-          />
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              alt="SiliconShelf"
+              width={210}
+              height={80}
+              priority
+              unoptimized
+            />
+          </Link>
           {isAuthPage ? (
             <Link href="/login">
               <Button variant="fill" size="xl" className="w-[121px] h-[54px]">
