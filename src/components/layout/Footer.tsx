@@ -1,3 +1,4 @@
+import Image from "next/image";
 import VisaIcon from "@/components/icons/VisaIcon";
 import MastercardIcon from "@/components/icons/MastercardIcon";
 import PaypalIcon from "@/components/icons/PaypalIcon";
@@ -11,9 +12,11 @@ export default function Footer() {
         {/* Logo container */}
         <div className="w-full lg:w-[532px] flex flex-col gap-6 items-start">
           {/* Logo */}
-          <img
+          <Image
             src="/logo.svg"
             alt="Silicon Shelf"
+            width={210}
+            height={70}
             className="h-[50px] sm:h-[60px] md:h-[70px] -my-2"
           />
 

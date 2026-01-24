@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
         hostname: "i.ibb.co",
       },
     ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CartIcon from "@/components/icons/CartIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
@@ -21,10 +22,12 @@ export default function Header() {
     <header className="w-full bg-[#1A1A1A]">
       <div className="max-w-[1440px] mx-auto px-10 py-8 flex flex-col gap-10">
         <div className="flex justify-between items-center">
-          <img
+          <Image
             src="/logo.svg"
             alt="SiliconShelf"
-            className="w-[210px] h-[80px]"
+            width={210}
+            height={80}
+            priority
           />
           {isAuthPage ? (
             <Link href="/login">
