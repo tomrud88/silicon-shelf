@@ -1,3 +1,4 @@
+import Logo from "@/components/icons/Logo";
 import VisaIcon from "@/components/icons/VisaIcon";
 import MastercardIcon from "@/components/icons/MastercardIcon";
 import PaypalIcon from "@/components/icons/PaypalIcon";
@@ -11,12 +12,7 @@ export default function Footer() {
         {/* Logo container */}
         <div className="w-full lg:w-[532px] flex flex-col gap-6 items-start">
           {/* Logo */}
-          <img
-            src="/logo.svg"
-            alt="Silicon Shelf"
-            fetchPriority="high"
-            className="h-[50px] sm:h-[60px] md:h-[70px] -my-2"
-          />
+          <Logo className="h-[50px] sm:h-[60px] md:h-[70px] -my-2" />
 
           {/* Copyright text */}
           <p className="max-w-full sm:max-w-[216px] font-normal text-sm sm:text-base leading-[26px] tracking-normal text-[#E7E7E7]">

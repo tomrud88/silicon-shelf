@@ -1,6 +1,7 @@
 "use client";
 
 import RegisterForm from "@/components/features/RegisterForm";
+import Logo from "@/components/icons/Logo";
 import { useState } from "react";
 import CheckCircleIcon from "@/components/icons/CheckCircleIcon";
 import Link from "next/link";
@@ -64,14 +65,7 @@ export default function RegisterPage() {
       {/* Register Container */}
       <div className="w-full max-w-[1440px] min-h-[calc(100vh-200px)] mx-auto flex items-center justify-center p-10">
         <div className="w-[448px] flex flex-col gap-[32px] items-center">
-          <img
-            src="/logo.svg"
-            alt="SiliconShelf"
-            width="210"
-            height="80"
-            fetchPriority="high"
-            style={{ width: "210px", height: "80px" }}
-          />
+          <Logo />
           <div className="w-[448px] min-h-[936px] rounded-md border border-[#383B42] bg-[#262626] p-6 flex flex-col gap-[32px]">
             <div className="w-[400px] flex items-center border-b border-[#383B42] pb-[20px]">
               <h1 className="font-medium text-[24px] leading-[36px] tracking-[-0.01em] text-[#FCFCFC]">

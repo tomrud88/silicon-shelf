@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import CartIcon from "@/components/icons/CartIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/icons/Logo";
 
 export default function Header() {
   const pathname = usePathname();
@@ -22,14 +23,7 @@ export default function Header() {
       <div className="max-w-[1440px] mx-auto px-10 py-8 flex flex-col gap-10">
         <div className="flex justify-between items-center">
           <Link href="/">
-            <img
-              src="/logo.svg"
-              alt="SiliconShelf"
-              width="210"
-              height="80"
-              fetchPriority="high"
-              style={{ width: "210px", height: "80px" }}
-            />
+            <Logo />
           </Link>
           {isAuthPage ? (
             <Link href="/login">
