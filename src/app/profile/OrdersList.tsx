@@ -29,11 +29,7 @@ export default async function OrdersList({ userId }: OrdersListProps) {
   }));
 
   if (orders.length === 0) {
-    return (
-      <div className="text-[var(--text-secondary)]">
-        No orders found
-      </div>
-    );
+    return <div className="text-[var(--text-secondary)]">No orders found</div>;
   }
 
   return (

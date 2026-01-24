@@ -1,31 +1,17 @@
-import MouseIcon from "@/components/icons/MouseIcon";
-import MonitorIcon from "@/components/icons/MonitorIcon";
-import HeadphoneIcon from "@/components/icons/HeadphoneIcon";
-import KeyboardIcon from "@/components/icons/KeyboardIcon";
-import WebcamIcon from "@/components/icons/WebcamIcon";
-import IconCard from "@/components/features/IconCard";
 import CategoryCarousel from "@/components/features/CategoryCarousel";
-import RecommendationSection from "@/components/features/RecommendationSection";
 import BrandSection from "@/components/features/BrandSection";
 import { prisma } from "@/lib/prisma";
-import type { ReactElement } from "react";
+import { Suspense } from "react";
+import CategoriesSection from "./CategoriesSection";
+import RecommendationsLoader from "./RecommendationsLoader";
 
 export default async function Home() {
+  // Only fetch categories for carousel immediately
   const categories = await prisma.category.findMany({
     orderBy: {
       createdAt: "asc",
     },
   });
-
-  // Fetch recommendations from the API
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const recommendationsRes = await fetch(
-    `${baseUrl}/api/products/recommendations`,
-    {
-      cache: "no-store",
-    }
-  );
-  const recommendations = await recommendationsRes.json();
 
   return (
     <main className="w-full overflow-x-hidden overflow-y-visible">
@@ -34,36 +20,43 @@ export default async function Home() {
         {/* Category Carousel */}
         <CategoryCarousel categories={categories} />
 
-        {/* Categories Section */}
-        <div className="flex flex-col items-center gap-8">
-          <h2 className="w-full max-w-[1360px] h-10 font-medium text-[28px] leading-[40px] tracking-[-0.01em] text-[#FCFCFC]">
-            Category
-          </h2>
-          <div className="w-full max-w-[1360px] grid grid-cols-1 min-[440px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 justify-items-center md:justify-items-stretch opacity-100">
-            {categories.slice(0, 5).map((category) => {
-              // Map category names to icons
-              const iconMap: { [key: string]: ReactElement } = {
-                Mouse: <MouseIcon />,
-                Monitor: <MonitorIcon />,
-                Headphone: <HeadphoneIcon />,
-                Keyboard: <KeyboardIcon />,
-                Webcam: <WebcamIcon />,
-              };
+        {/* Categories Section with Suspense */}
+        <Suspense
+          fallback={
+            <div className="flex flex-col items-center gap-8">
+              <div className="h-10 w-48 bg-[#383B42] rounded animate-pulse" />
+              <div className="w-full max-w-[1360px] grid grid-cols-1 min-[440px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="w-full h-[120px] bg-[#383B42] rounded animate-pulse"
+                  />
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <CategoriesSection />
+        </Suspense>
 
-              return (
-                <IconCard
-                  key={category.id}
-                  icon={iconMap[category.name] || <MouseIcon />}
-                  name={category.name}
-                  categoryId={category.id}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Recommendation Section */}
-        <RecommendationSection recommendations={recommendations} />
+        {/* Recommendation Section with Suspense */}
+        <Suspense
+          fallback={
+            <div className="flex flex-col items-center gap-8">
+              <div className="h-10 w-64 bg-[#383B42] rounded animate-pulse" />
+              <div className="w-full max-w-[1360px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-full h-[400px] bg-[#383B42] rounded animate-pulse"
+                  />
+                ))}
+              </div>
+            </div>
+          }
+        >
+          <RecommendationsLoader />
+        </Suspense>
 
         {/* Brand Section */}
         <BrandSection />
