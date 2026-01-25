@@ -32,6 +32,24 @@ const ProductGridSkeleton = () => (
     className="flex flex-col justify-between gap-12 opacity-100"
     aria-busy="true"
   >
+    <div className="flex items-center justify-center py-8 mb-8">
+      <div className="flex items-center gap-3">
+        <div className="flex gap-1">
+          <div className="w-3 h-3 bg-[#F29145] rounded-full animate-bounce" />
+          <div
+            className="w-3 h-3 bg-[#F29145] rounded-full animate-bounce"
+            style={{ animationDelay: "0.2s" }}
+          />
+          <div
+            className="w-3 h-3 bg-[#F29145] rounded-full animate-bounce"
+            style={{ animationDelay: "0.4s" }}
+          />
+        </div>
+        <span className="text-[#F29145] font-semibold text-base">
+          Loading products...
+        </span>
+      </div>
+    </div>
     <div className="grid gap-x-6 gap-y-12 justify-items-center min-[1400px]:justify-items-stretch [grid-template-columns:repeat(1,300px)] min-[670px]:[grid-template-columns:repeat(2,300px)] min-[1400px]:[grid-template-columns:repeat(3,300px)]">
       {Array.from({ length: 9 }).map((_, idx) => (
         <div
