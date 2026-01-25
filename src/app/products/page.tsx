@@ -213,7 +213,10 @@ export default async function ProductsPage({
               <ShowDropdown selectedLimit={params.limit} />
             </div>
 
-            <Suspense fallback={<ProductGridSkeleton />}>
+            <Suspense
+              key={`${params.categoryId}-${params.sort}-${params.minPrice}-${params.maxPrice}-${params.limit}-${params.page}`}
+              fallback={<ProductGridSkeleton />}
+            >
               <ProductGridSection
                 categoryId={params.categoryId}
                 sort={params.sort}
