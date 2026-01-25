@@ -21,6 +21,9 @@ export default function CategoryFilter({
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [optimisticCategoryId, setOptimisticCategoryId] = useState<
+    string | null | undefined
+  >(undefined);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,7 +34,15 @@ export default function CategoryFilter({
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
 
+  // Sync back to actual selection once navigation completes
+  useEffect(() => {
+    setOptimisticCategoryId(undefined);
+  }, [selectedCategoryId]);
+
   const handleCategoryChange = (categoryId: string | null) => {
+    // Instant UI response
+    setOptimisticCategoryId(categoryId);
+
     const params = new URLSearchParams(searchParams.toString());
 
     if (categoryId === null) {
@@ -43,6 +54,11 @@ export default function CategoryFilter({
 
     router.push(`/products?${params.toString()}`);
   };
+
+  const displayCategoryId =
+    optimisticCategoryId !== undefined
+      ? optimisticCategoryId
+      : selectedCategoryId;
 
   const visibleCategories = showAllCategories
     ? categories
@@ -74,7 +90,7 @@ export default function CategoryFilter({
               type="radio"
               name="category"
               className="w-[26px] h-[26px] rounded-[6px] p-[3px] bg-[#222327] border border-[#616674] appearance-none checked:bg-[#F29145] checked:border-0 cursor-pointer flex-shrink-0"
-              checked={!selectedCategoryId}
+              checked={!displayCategoryId}
               onChange={() => handleCategoryChange(null)}
             />
             <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#FCFCFC]">
@@ -92,7 +108,7 @@ export default function CategoryFilter({
                 type="radio"
                 name="category"
                 className="w-[26px] h-[26px] rounded-[6px] p-[3px] bg-[#222327] border border-[#616674] appearance-none checked:bg-[#F29145] checked:border-0 cursor-pointer flex-shrink-0"
-                checked={selectedCategoryId === category.id}
+                checked={displayCategoryId === category.id}
                 onChange={() => handleCategoryChange(category.id)}
               />
               <span className="font-['Inter'] font-medium text-base leading-[26px] tracking-[0%] text-[#FCFCFC]">

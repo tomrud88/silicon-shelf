@@ -1,12 +1,11 @@
+import { Suspense } from "react";
 import CategoryFilter from "@/components/features/CategoryFilter";
-import DownArrowIcon from "@/components/icons/DownArrowIcon";
-import Button from "@/components/ui/Button";
 import ProductCard from "@/components/features/ProductCard";
-import SortDropdown from "@/components/ui/SortDropdown";
 import PriceFilter from "@/components/features/PriceFilter";
-import ShowDropdown from "@/components/ui/ShowDropdown";
-import Pagination from "@/components/ui/Pagination";
 import ProductsBreadcrumb from "@/components/layout/ProductsBreadcrumb";
+import ShowDropdown from "@/components/ui/ShowDropdown";
+import SortDropdown from "@/components/ui/SortDropdown";
+import Pagination from "@/components/ui/Pagination";
 
 interface Product {
   id: string;
@@ -28,13 +27,89 @@ interface ProductsResponse {
   };
 }
 
+const ProductGridSkeleton = () => (
+  <div
+    className="flex flex-col justify-between gap-12 opacity-100"
+    aria-busy="true"
+  >
+    <div className="grid gap-x-6 gap-y-12 justify-items-center min-[1400px]:justify-items-stretch [grid-template-columns:repeat(1,300px)] min-[670px]:[grid-template-columns:repeat(2,300px)] min-[1400px]:[grid-template-columns:repeat(3,300px)]">
+      {Array.from({ length: 9 }).map((_, idx) => (
+        <div
+          key={idx}
+          className="w-[300px] h-[444px] rounded-[10px] border-[1.5px] border-[#383B42] bg-[#1A1C1F] p-6 flex flex-col justify-between opacity-100 animate-pulse"
+        >
+          <div className="w-[252px] h-[252px] rounded-[10px] bg-[#2A2C31]" />
+          <div className="w-[252px] h-[116px] flex flex-col gap-4">
+            <div className="h-[18px] w-24 bg-[#2A2C31] rounded" />
+            <div className="h-[24px] w-full bg-[#2A2C31] rounded" />
+            <div className="w-[252px] h-[50px] flex justify-between items-center">
+              <div className="h-[32px] w-20 bg-[#2A2C31] rounded" />
+              <div className="w-[50px] h-[50px] rounded-[10px] bg-[#2A2C31]" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div className="flex justify-center items-center gap-4">
+      <div className="h-[40px] w-32 bg-[#2A2C31] rounded animate-pulse" />
+    </div>
+  </div>
+);
+
+async function ProductGridSection({
+  categoryId,
+  sort,
+  minPrice,
+  maxPrice,
+  limit,
+  page,
+}: {
+  categoryId?: string;
+  sort?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  limit?: string;
+  page?: string;
+}) {
+  const { products, pagination } = await getProducts(
+    categoryId,
+    sort,
+    minPrice,
+    maxPrice,
+    limit,
+    page,
+  );
+
+  return (
+    <div className="flex flex-col justify-between gap-12 opacity-100">
+      <div className="grid gap-x-6 gap-y-12 justify-items-center min-[1400px]:justify-items-stretch [grid-template-columns:repeat(1,300px)] min-[670px]:[grid-template-columns:repeat(2,300px)] min-[1400px]:[grid-template-columns:repeat(3,300px)]">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            imageUrl={product.imageUrl}
+            categoryName={product.category.name}
+            productName={product.name}
+            price={product.price}
+          />
+        ))}
+      </div>
+
+      <Pagination
+        currentPage={pagination.currentPage}
+        totalPages={pagination.totalPages}
+      />
+    </div>
+  );
+}
+
 async function getProducts(
   categoryId?: string,
   sort?: string,
   minPrice?: string,
   maxPrice?: string,
   limit?: string,
-  page?: string
+  page?: string,
 ): Promise<ProductsResponse> {
   const params = new URLSearchParams({ limit: limit || "9" });
   if (categoryId) {
@@ -59,7 +134,7 @@ async function getProducts(
     }/api/products?${params.toString()}`,
     {
       cache: "no-store",
-    }
+    },
   );
 
   if (!res.ok) {
@@ -82,14 +157,6 @@ export default async function ProductsPage({
   }>;
 }) {
   const params = await searchParams;
-  const { products, pagination } = await getProducts(
-    params.categoryId,
-    params.sort,
-    params.minPrice,
-    params.maxPrice,
-    params.limit,
-    params.page
-  );
   return (
     <main className="w-full overflow-x-hidden">
       {/* Breadcrumb */}
@@ -128,26 +195,17 @@ export default async function ProductsPage({
               <ShowDropdown selectedLimit={params.limit} />
             </div>
 
-            {/* Product Grid */}
-            <div className="grid gap-x-6 gap-y-12 justify-items-center min-[1400px]:justify-items-stretch [grid-template-columns:repeat(1,300px)] min-[670px]:[grid-template-columns:repeat(2,300px)] min-[1400px]:[grid-template-columns:repeat(3,300px)]">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  imageUrl={product.imageUrl}
-                  categoryName={product.category.name}
-                  productName={product.name}
-                  price={product.price}
-                />
-              ))}
-            </div>
+            <Suspense fallback={<ProductGridSkeleton />}>
+              <ProductGridSection
+                categoryId={params.categoryId}
+                sort={params.sort}
+                minPrice={params.minPrice}
+                maxPrice={params.maxPrice}
+                limit={params.limit}
+                page={params.page}
+              />
+            </Suspense>
           </div>
-
-          {/* Pagination Container */}
-          <Pagination
-            currentPage={pagination.currentPage}
-            totalPages={pagination.totalPages}
-          />
         </div>
       </div>
     </main>
