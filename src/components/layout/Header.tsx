@@ -44,7 +44,7 @@ export default function Header() {
         </div>
         {!isAuthPage && (
           <nav className="flex gap-8 list-none">
-            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--primary-500)]">
+            <li className={`h-[26px] font-semibold text-base leading-[26px] tracking-normal ${pathname === "/" ? "text-[var(--primary-500)]" : "text-[var(--neutral-500)]"}`}>
               <Link
                 href="/"
                 onClick={() => handleNavClick("Home", "/")}
@@ -53,7 +53,7 @@ export default function Header() {
                 Home
               </Link>
             </li>
-            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
+            <li className={`h-[26px] font-semibold text-base leading-[26px] tracking-normal ${pathname.startsWith("/products") ? "text-[var(--primary-500)]" : "text-[var(--neutral-500)]"}`}>
               <Link
                 href="/products"
                 onClick={() => handleNavClick("Products", "/products")}
@@ -62,7 +62,7 @@ export default function Header() {
                 Product
               </Link>
             </li>
-            <li className=" h-[26px] font-semibold text-base leading-[26px] tracking-normal text-[var(--neutral-500)]">
+            <li className={`h-[26px] font-semibold text-base leading-[26px] tracking-normal ${pathname === "/contact" ? "text-[var(--primary-500)]" : "text-[var(--neutral-500)]"}`}>
               <Link
                 href="/contact"
                 onClick={() => handleNavClick("Contact", "/contact")}
