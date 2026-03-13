@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,7 +10,7 @@ export async function GET(request: NextRequest) {
     if (!session || !session.user?.id) {
       return NextResponse.json(
         { error: "Unauthorized - Please log in" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -47,7 +45,7 @@ export async function GET(request: NextRequest) {
     console.error("Error fetching user address:", error);
     return NextResponse.json(
       { error: "Failed to fetch address" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -60,7 +58,7 @@ export async function PUT(request: NextRequest) {
     if (!session || !session.user?.id) {
       return NextResponse.json(
         { error: "Unauthorized - Please log in" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -73,7 +71,7 @@ export async function PUT(request: NextRequest) {
     if (!address || !city || !postalCode || !country) {
       return NextResponse.json(
         { error: "Missing required address fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -106,7 +104,7 @@ export async function PUT(request: NextRequest) {
     console.error("Error saving address:", error);
     return NextResponse.json(
       { error: "Failed to save address" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

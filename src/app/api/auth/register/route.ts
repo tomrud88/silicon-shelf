@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,7 +26,7 @@ export async function POST(request: NextRequest) {
     if (existingUser) {
       return NextResponse.json(
         { error: "User with this email already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -59,15 +57,26 @@ export async function POST(request: NextRequest) {
         message: "User created successfully",
         user: userWithoutPassword,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("Registration error:", error);
+    console.error("Error details:", {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined,
+    });
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      {
+        error: "Internal server error",
+        details:
+          process.env.NODE_ENV === "development"
+            ? error instanceof Error
+              ? error.message
+              : String(error)
+            : undefined,
+      },
+      { status: 500 },
     );
-  } finally {
-    await prisma.$disconnect();
   }
 }

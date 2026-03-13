@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
   try {
@@ -18,7 +16,7 @@ export async function POST(request: Request) {
     if (!user) {
       return NextResponse.json(
         { error: "Invalid email/phone or password" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -28,7 +26,7 @@ export async function POST(request: Request) {
     if (!isPasswordValid) {
       return NextResponse.json(
         { error: "Invalid email/phone or password" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -44,13 +42,13 @@ export async function POST(request: Request) {
           country: user.country,
         },
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
       { error: "An error occurred during login" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
