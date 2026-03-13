@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import ClosedEyeIcon from "@/components/icons/ClosedEyeIcon";
 import CheckIcon from "@/components/icons/CheckIcon";
-import Notification from "@/components/ui/Notification";
 
 type StepOneFormData = {
   emailOrPhone: string;
@@ -24,7 +23,6 @@ export default function LoginForm() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [notification, setNotification] = useState<string | null>(null);
   const router = useRouter();
 
   const stepOneForm = useForm<StepOneFormData>();
@@ -53,12 +51,8 @@ export default function LoginForm() {
         return;
       }
 
-      // Show success notification
-      setNotification("You have been logged in");
-
-      // Redirect to home page
-      router.push("/");
-      router.refresh();
+      // Redirect to home page immediately
+      window.location.href = "/";
     } catch (error) {
       console.error("Login error:", error);
       setLoginError("An error occurred during login");
@@ -68,17 +62,10 @@ export default function LoginForm() {
 
   if (step === 2) {
     return (
-      <>
-        {notification && (
-          <Notification
-            message={notification}
-            onClose={() => setNotification(null)}
-          />
-        )}
-        <form
-          onSubmit={stepTwoForm.handleSubmit(handleSignIn)}
-          className="w-[400px] flex flex-col gap-[32px]"
-        >
+      <form
+        onSubmit={stepTwoForm.handleSubmit(handleSignIn)}
+        className="w-[400px] flex flex-col gap-[32px]"
+      >
           <div className="w-[400px] flex flex-col gap-[24px]">
             <div className="w-[400px] flex flex-col gap-[8px]">
               <label
@@ -159,7 +146,6 @@ export default function LoginForm() {
             </Button>
           </div>
         </form>
-      </>
     );
   }
 
